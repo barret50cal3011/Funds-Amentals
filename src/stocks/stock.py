@@ -12,5 +12,3 @@ class Stock:
     
     else:
       self.__stock_price = stock_price
-
-  

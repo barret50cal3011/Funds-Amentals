@@ -1,4 +1,11 @@
 @startuml funs-amentas-uml
 
+abstract class Stock{
+    -price: double
+    -company_name: String
+
+    +Stock()
+}
+
 
 @enduml
