@@ -1,4 +1,7 @@
 
 
 if __name__ == '__main__':
-    pass
+    hi = {"ArabOilCompany": "Oil", "Doors": "Software", "Edison": "Electricity"
+                             , "GamePause": "VideoGames", "mvidia": "PC Components", 
+                             "pear": "Smartphones" }
+    print(hi)

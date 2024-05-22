@@ -7,8 +7,10 @@ class Stock:
     return self.__stock_price
     
   def set_stock_price(self, stock_price: float):
-    if stock_price == str:
-      raise TypeError('Stock price isn\'t a str ')
-    
+    if stock_price != float:
+      try:
+        float(stock_price)
+      except ValueError as error:
+        print(f'Error: {error}')
     else:
       self.__stock_price = stock_price
