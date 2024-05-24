@@ -1,13 +1,19 @@
 from user import User
 import bcrypt
+import os
+
+# Pepper value (should be kept secret and secure)
+PEPPER = os.environ.get('PEPPER', 'default_pepper_value')
 
 # Input user name and password
 name: str = input("What is your name? ")
 password: str = input("What is your password? ")
 
+# Add pepper to the password
+peppered_password = (password + PEPPER).encode('utf-8')
+
 # Hash the password with a salt
-pwd: str = password.encode('utf-8')
-hashed = bcrypt.hashpw(pwd, bcrypt.gensalt())
+hashed = bcrypt.hashpw(peppered_password, bcrypt.gensalt())
 user = User(name, hashed)
 
 while True:
@@ -19,7 +25,7 @@ while True:
             match secondAnswer:
                 case "1":
                     while True:
-                        pwds = bytes(input("Input the password: "), 'utf-8')
+                        pwds = bytes(input("Input the password: ") + PEPPER, 'utf-8')
                         if bcrypt.checkpw(pwds, user._User__password):  # Use the stored hash for verification
                             print("The password is correct")
                             break
@@ -29,15 +35,15 @@ while True:
                     user.set_name(name)
                 case "2":
                     while True:
-                        pwds = bytes(input("Input the current password: "), 'utf-8')
+                        pwds = bytes(input("Input the current password: ") + PEPPER, 'utf-8')
                         if bcrypt.checkpw(pwds, user._User__password):  # Use the stored hash for verification
                             print("The password is correct")
                             break
                         else:
                             print("The password is incorrect\nTry again")
                     second_password: str = input("What is your new password? ")
-                    new_pwd: str = second_password.encode('utf-8')
-                    new_hash = bcrypt.hashpw(new_pwd, bcrypt.gensalt())
+                    new_peppered_password: str = (second_password + PEPPER).encode('utf-8')
+                    new_hash = bcrypt.hashpw(new_peppered_password, bcrypt.gensalt())
                     user.set_password(new_hash)
                 case "3":
                     break
