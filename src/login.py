@@ -1,7 +1,7 @@
 from user import User
 
 name:str = input("What is your name? ")
-age:int = input("How old are you? ")
+age:str = input("How old are you? ")
 password:str = input("What is your password? ")
 user = User(name, age, password)
 while True:
@@ -15,7 +15,7 @@ while True:
           name:str = input("What is your name? ")
           user.set_name(name)
         case "2":
-          age:int = input("How old are you? ")
+          age:str = input("How old are you? ")
           user.set_age(age)
         case "3":
           password:str = input("What is your password (y/n)? ")

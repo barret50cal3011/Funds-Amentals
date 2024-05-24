@@ -1,5 +1,5 @@
 class User:
-  def __init__(self, name:str, age:int, password:str):
+  def __init__(self, name:str, age:str, password:str):
     self.__name=name
     self.__age=age
     self.__password=password
@@ -13,7 +13,7 @@ class User:
     return self.__password
   def set_name(self, name:str):
     self.__name=name
-  def set_age(self, age:int):
+  def set_age(self, age:str):
     self.__age=age
   def sert_password(self, password:str):
     self.__password=password
