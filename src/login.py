@@ -11,7 +11,6 @@ password: str = input("What is your password? ")
 
 # Add pepper to the password
 peppered_password = (password + PEPPER).encode('utf-8')
-
 # Hash the password with a salt
 hashed = bcrypt.hashpw(peppered_password, bcrypt.gensalt())
 user = User(name, hashed)
