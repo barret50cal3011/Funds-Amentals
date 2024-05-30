@@ -1,50 +1,37 @@
-import events
-import stocks
-import Player
+from events import events, create_event
+from stocks import Stock
+from Player import Player
+import random
 
 class World:
-    def __init__(self,events,stocks,player):
-        self.events = events.Events()
-        self.stocks = stocks.Stock()
-        self.player = player.Player()
+    def __init__(self, events, stocks, player):
+        self.events = events
+        self.stocks = stocks
+        self.player = player
+
     def run(self):
-        self.events.run()
-        self.stocks.run()
-        self.player.run()
-    def stop(self):
-        self.events.stop()
-        self.stocks.stop()
-        self.player.stop()
-    def pause(self):
-        self.events.pause()
-        self.stocks.pause()
-        self.player.pause()
-    def resume(self):
-        self.events.resume()
-        self.stocks.resume()
-        self.player.resume()
-    def restart(self):
-        self.events.restart()
-        self.stocks.restart()
-        self.player.restart()
-    def save(self):
-        self.events.save()
-        self.stocks.save()
-        self.player.save()
-    def load(self):
-        self.events.load()
-        self.stocks.load()
-        self.player.load()
-    def quit(self):
-        self.events.quit()
-        self.stocks.quit()
-        self.player.quit()
-    def exit(self):
-        self.events.exit()
-        self.stocks.exit()
-        self.player.exit()
-    def help(self):
-        self.events.help()
-        self.stocks.help()
-        self.player.help()
-    
+        timer = 0
+        while timer < 10:
+            random_event_name = create_event()
+            random_event = self.events.get(random_event_name)
+            random_event.change_state()
+
+            if random_event.get_state() == "Active":
+                random_event.set_percentage(random.uniform(-5, 5))
+                random_event.affect_stocks(self.stocks)
+
+            print(f"{random_event_name} is {random_event.get_state()}",
+                  f"\nDescription: {random_event.get_description()}",
+                  f"\nImpact: {random_event.get_percentage()}%",
+                  "\n")
+
+            for stock in self.stocks:
+                print(f"{stock.company_name} stock price: {stock.get_stock_price()}")
+
+            timer += 1
+
+if __name__ == '__main__':
+    stocks_list = [Stock(100.0, "ABC Corp"), Stock(150.0, "XYZ Inc")]
+    player = Player(starting_usd=1000.0)
+    world = World(events, stocks_list, player)
+    world.run()
