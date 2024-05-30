@@ -1,4 +1,6 @@
-class Stock:
+from abstractstock import AbstractStock
+
+class Stock(AbstractStock):
   def __init__(self, stock_price: float , company_name: str):
     self.__stock_price: float = stock_price
     self.company_name: str = company_name
