@@ -1,3 +1,4 @@
+
 from events import events, create_event
 from stocks import Stock
 from Player import Player
@@ -31,7 +32,7 @@ class World:
             timer += 1
 
 if __name__ == '__main__':
-    stocks_list = [Stock(100.0, "ABC Corp"), Stock(150.0, "XYZ Inc")]
+    stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
     player = Player(starting_usd=1000.0)
     world = World(events, stocks_list, player)
     world.run()
