@@ -80,7 +80,7 @@ class World:
 
 
 if __name__ == '__main__':
-    stocks_list = [Stock(100.0,"Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
+    stocks_list = [Stock(100.0), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
     player = Player(starting_usd=1000.0)
     world = World(events, stocks_list, player)
     world.run()
