@@ -8,7 +8,8 @@ class View:
     COMMANDS = {
         "help",
         "read_news",
-        "buy_stock",
+        "buy_stocks",
+        "sell_stocks",
         "next_week",
         "exit"
     }

@@ -52,7 +52,7 @@ class Events:
     self.__percentage = percentage
   
 
-  # Depending on the value of self.__state, it change it value to the opposite
+  # Depending on the value of self.__state, it changes its value to the opposite
   def change_state(self):
     if self.__state == "Active":
       self.__state = "Inactive"
@@ -67,7 +67,7 @@ def create_event()->str:
   random_event:str = random.choice(events_list)
   return random_event
 
-# Save the the objects in a dict for accessing to it
+# Save the the objects in a dict to access it
 
 # ? Could we create a dict for storing the events?
 events:dict = {"War": Events(event_name="War"), 
@@ -80,7 +80,7 @@ events:dict = {"War": Events(event_name="War"),
 
 if __name__ == '__main__':
   
-  # * How will be implemented the time, i will add something similar for trying this class
+  # * How will time be implemented, i will add something similar for trying this class
   # * timer and the while cycle will change
   timer:int = 0
 
