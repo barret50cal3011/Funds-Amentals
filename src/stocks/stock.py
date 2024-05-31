@@ -1,4 +1,4 @@
-from abstractstock import AbstractStock
+from stocks.abstractstock import AbstractStock
 
 class Stock(AbstractStock):
   def __init__(self, stock_price: float , company_name: str):
