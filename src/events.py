@@ -4,7 +4,7 @@ import pdb
 # * Commented fuctions were changed (events:dict, events __init__, create_event too)
 
 class Events:
-  def __init__(self, event_name:str, event_duration:float = 0, event_range:tuple = (0, 0)):
+  def __init__(self, event_name:str, event_duration:float = 0, event_percentage_range:tuple = (0, 0)):
 
     self.__event_name:str = event_name
 
@@ -21,7 +21,7 @@ class Events:
     self.__timer:float = 0
     
     # Range that will have the the variation of percent on of each event
-    self.__event_range = event_range
+    self.__event_percentage_range = event_percentage_range
     
     # self.__stocks_company:dict = {"ArabOilCompany": "Oil", "Doors": "Software", "Edison": "Electricity", 
     #                               "GamePause": "VideoGames", "mvidia": "PC Components", 
@@ -31,8 +31,6 @@ class Events:
   def get_event_name(self):
     return self.__event_name
     
-  def get_description(self):
-    return self.__description
     
   def get_impact(self):
     return self.__impact
@@ -45,6 +43,9 @@ class Events:
   
   def get_timer(self):
     return self.__timer
+  
+  def get_event_percentage_range(self):
+    return self.__event_percentage_range
 
   def set_timer(self):
     self.__timer = self.__event_duration
@@ -57,7 +58,13 @@ class Events:
   
   def change_percentage(self):  
     if self.__state == "Active":
-      percentage = (random.uniform(self.__event_range))
+      pdb.set_trace()
+      # gets the tuple and takes his start and ending value
+      # for using it to decide the percentage value
+      starts:int = self.get_event_percentage_range()[0]
+      ends:int = self.get_event_percentage_range()[1]
+      percentage = (random.uniform(starts, ends))
+
       self.set_percentage(percentage=percentage)
     elif self.__state == "Inctive":
       self.set_percentage(percentage=0)
@@ -115,12 +122,12 @@ def desactivate_event()->None:
     events.get(event).change_percentage()
     events.get(event).change_impact()
 
-events:dict = {"War": Events(event_name="War", event_duration=12, event_range=(-30, 40)),
-              "Technology advances": Events(event_name="Technology advances", event_duration=4, event_range=(-20, 50)), 
-              "Accident": Events(event_name="Accident", event_duration=6, event_range=(-50, -10)), 
-              "Seasons": Events(event_name="Seasons", event_duration=3, event_range=(-10, 60)), 
-              "Natural disasters": Events(event_name="Natural disasters", event_duration=1, event_range=(-20, -5)), 
-              "Social Media": Events(event_name="Social Media", event_duration=2, event_range=(-60, 80))}
+events:dict = {"War": Events(event_name="War", event_duration=12, event_percentage_range=(-30, 40)),
+              "Technology advances": Events(event_name="Technology advances", event_duration=4, event_percentage_range=(-20, 50)), 
+              "Accident": Events(event_name="Accident", event_duration=6, event_percentage_range=(-50, -10)), 
+              "Seasons": Events(event_name="Seasons", event_duration=3, event_percentage_range=(-10, 60)), 
+              "Natural disasters": Events(event_name="Natural disasters", event_duration=1, event_percentage_range=(-20, -5)), 
+              "Social Media": Events(event_name="Social Media", event_duration=2, event_percentage_range=(-60, 80))}
 
 active_events:list = []
 
