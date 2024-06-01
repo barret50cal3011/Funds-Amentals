@@ -1,30 +1,28 @@
 import random
+import pdb 
 
-# * Read all the comments and write in the group if you have any question, 
-# * suggestion or anything else to improve the this module
-
-# import pdb i use pdb for debuggin, change state is operative, i will add description soon
+# * Commented fuctions were changed (events:dict, events __init__, create_event too)
 
 class Events:
-  def __init__(self, event_name:str):
+  def __init__(self, event_name:str, event_duration:float = 0, event_range:tuple = (0, 0)):
 
     self.__event_name:str = event_name
-
-    self.__description:str = "None"
-
-    # * This part below could be change in the future
-    # * Its a beta of this part
 
     self.__impact:str = "Stable"
 
     self.__percentage:float = 0
+
     self.__state:str = "Inactive"
 
-    # * Things that gains or lost value and the companies that could be affected
+    # This is the immutable value of the duration of eache event
+    self.__event_duration:float = event_duration
 
-    # Example: An a war starts, the value of the guns could Up, you could invert in usWeapons Stocks
-    # ! I dont use this because i dont know if it will be use in the future
-
+    # This is the timer that will variate along the time
+    self.__timer:float = 0
+    
+    # Range that will have the the variation of percent on of each event
+    self.__event_range = event_range
+    
     # self.__stocks_company:dict = {"ArabOilCompany": "Oil", "Doors": "Software", "Edison": "Electricity", 
     #                               "GamePause": "VideoGames", "mvidia": "PC Components", 
     #                          "pear": "Smartphones", "usWeapons": "Guns" }
@@ -44,44 +42,98 @@ class Events:
 
   def get_state(self):
     return self.__state
-    
+  
+  def get_timer(self):
+    return self.__timer
+
+  def set_timer(self):
+    self.__timer = self.__event_duration
+
   def set_impact(self, impact:str):
     self.__impact = impact
 
   def set_percentage(self, percentage:float):
     self.__percentage = percentage
   
+  def change_percentage(self):  
+    if self.__state == "Active":
+      percentage = (random.uniform(self.__event_range))
+      self.set_percentage(percentage=percentage)
+    elif self.__state == "Inctive":
+      self.set_percentage(percentage=0)
+
+  def change_impact(self):
+    if self.__state == "Active":
+      if self.__percentage > 0:
+        self.set_impact("go up")
+      elif self.__percentage < 0:
+        self.set_impact("go down")
+      elif self.__percentage == 0:
+        self.set_impact("be stable")
+
+    
 
   # Depending on the value of self.__state, it changes its value to the opposite
-  def change_state(self):
-    if self.__state == "Active":
-      self.__state = "Inactive"
-    else:
+  def state_activer(self):
+    if self.__state == "Inactive":
       self.__state = "Active"
+      self.set_timer()
+      
+
+  def state_desactiver(self):
+    if self.__state == "Active" and self.__timer != 0:
+      self.__timer -= 1
+      if self.__state == "Active" and self.__timer == 0:
+        self.__state = "Inactive"
+    
+  
+  
+  # def change_state(self):
+  #   if self.__state == "Active":
+  #     self.__state = "Inactive"
+  #   else:
+  #     self.__state = "Active"
       
 # Select an event randomly
 
 def create_event()->str:
+  verificator:bool = True
   events_list:list = ["War", "Technology advances", "Accident", 
                     "Seasons", "Natural disasters", "Social Media"]
-  random_event:str = random.choice(events_list)
-  return random_event
+  while verificator:
+    random_event:str = random.choice(events_list)
+    if random_event not in active_events:
+      verificator:bool = False
+      active_events.append(random_event)
+      events.get(random_event).state_activer()
+      return random_event
 
-# Save the the objects in a dict to access it
 
-# ? Could we create a dict for storing the events?
-events:dict = {"War": Events(event_name="War"), 
-              "Technology advances": Events(event_name="Technology advances"), 
-              "Accident": Events(event_name="Accident"), 
-              "Seasons": Events(event_name="Seasons"), 
-              "Natural disasters": Events(event_name="Natural disasters"), 
-              "Social Media": Events(event_name="Social Media")}
+def desactivate_event()->None:
+  for event in active_events:
+    events.get(event).state_desactiver()
+    events.get(event).change_percentage()
+    events.get(event).change_impact()
+
+events:dict = {"War": Events(event_name="War", event_duration=12, event_range=(-30, 40)),
+              "Technology advances": Events(event_name="Technology advances", event_duration=4, event_range=(-20, 50)), 
+              "Accident": Events(event_name="Accident", event_duration=6, event_range=(-50, -10)), 
+              "Seasons": Events(event_name="Seasons", event_duration=3, event_range=(-10, 60)), 
+              "Natural disasters": Events(event_name="Natural disasters", event_duration=1, event_range=(-20, -5)), 
+              "Social Media": Events(event_name="Social Media", event_duration=2, event_range=(-60, 80))}
+
+active_events:list = []
+
+# events:dict = {"War": Events(event_name="War"), 
+#               "Technology advances": Events(event_name="Technology advances"), 
+#               "Accident": Events(event_name="Accident"), 
+#               "Seasons": Events(event_name="Seasons"), 
+#               "Natural disasters": Events(event_name="Natural disasters"), 
+#               "Social Media": Events(event_name="Social Media")}
 
 
 if __name__ == '__main__':
   
-  # * How will time be implemented, i will add something similar for trying this class
-  # * timer and the while cycle will change
   timer:int = 0
 
   # The time that the game will stay active
@@ -91,24 +143,18 @@ if __name__ == '__main__':
 
     # get and a random event
     random_event:str = create_event()
-    # pdb.set_trace()
 
-    # Update the state of the ramdon event that was selected
-    # I dont know how to determinate the duration of event 
-    # ? there is a better way for making it?
-
-    events.get(random_event).change_state()
-    # pdb.set_trace()
-
-    print(random_event, "is", events.get(random_event).get_state(), 
-          "\n"+ "Description:", events.get(random_event).get_description(), "\n")
-
+    # events.get(random_event).change_state()
     
-    #  ? Should i create a method that have the stocks affected by an event?
-    # ? Example: War [pear, edison]
-    # ? a war could affected the price of oil and guns, so it will make increase the value of 2 diferent stocks
+    print(random_event, "is", events.get(random_event).get_state(), "\n")
 
+    # print(random_event, "is", events.get(random_event).get_state(), 
+    #       "\n"+ "Description:", events.get(random_event).get_description(), "\n")
 
-    
+    next_week:str =str(input("Would you like to advence to the next week? (y/n)"))
+    # * desactivate_event ha de ejecutarse justo despues de pasar a la siguiente semana
+    if next_week:
+      desactivate_event()
+    pdb.set_trace()
 
     timer += 1
