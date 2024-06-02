@@ -58,7 +58,6 @@ class Events:
   
   def change_percentage(self):  
     if self.__state == "Active":
-      pdb.set_trace()
       # gets the tuple and takes his start and ending value
       # for using it to decide the percentage value
       starts:int = self.get_event_percentage_range()[0]
@@ -92,6 +91,7 @@ class Events:
       self.__timer -= 1
       if self.__state == "Active" and self.__timer == 0:
         self.__state = "Inactive"
+        
     
   
   
@@ -121,6 +121,8 @@ def desactivate_event()->None:
     events.get(event).state_desactiver()
     events.get(event).change_percentage()
     events.get(event).change_impact()
+    if event.get(event).get_state == "Inactive":
+      active_events.pop(event)
 
 events:dict = {"War": Events(event_name="War", event_duration=12, event_percentage_range=(-30, 40)),
               "Technology advances": Events(event_name="Technology advances", event_duration=4, event_percentage_range=(-20, 50)), 
@@ -129,6 +131,7 @@ events:dict = {"War": Events(event_name="War", event_duration=12, event_percenta
               "Natural disasters": Events(event_name="Natural disasters", event_duration=1, event_percentage_range=(-20, -5)), 
               "Social Media": Events(event_name="Social Media", event_duration=2, event_percentage_range=(-60, 80))}
 
+# * This could be removed from the code (Active_events)
 active_events:list = []
 
 # events:dict = {"War": Events(event_name="War"), 
