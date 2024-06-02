@@ -79,6 +79,9 @@ class World:
             random_event.affect_stocks(self.__stocks)
 
 
+    def see_portfolio(self):
+        return self.__player.get_portfolio()
+
 if __name__ == '__main__':
     stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
     player = Player(starting_usd=1000.0)
