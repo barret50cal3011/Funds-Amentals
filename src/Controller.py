@@ -9,7 +9,10 @@ class Controller:
     def eval_comad(self, command):
         command_split = command.split(" ")
         if command_split[0] == "read_news":
-            return self.__world.read_news()
+            if(len(command_split) == 1):
+                return self.__world.read_news()
+            else:
+                self.__world.read_news(command_split[1])
         elif command_split[0] == "buy_stocks":
             if len(command_split) < 3 or command_split[1].isdigit() or not command_split[2].isdigit():
                 raise Exception(textwrap.dedent(

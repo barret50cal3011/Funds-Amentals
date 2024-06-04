@@ -29,10 +29,11 @@ class View:
         If a command is given, it prints a description of the command that was given(just like this one).
         When using this command <> means that it is obligatory to add the information for the funtionality of the command and [] means that it is optional.
         """),
-        "read_news": 
+        "read_news [News tittle]": 
         textwrap.dedent("""
         read_news
         prints a list of the events that are ocurring at that week.
+        If a tittle is added the command prints the news article of the news that was selencted.
         """),
         "buy_stocks": 
         textwrap.dedent("""

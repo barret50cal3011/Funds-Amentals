@@ -13,7 +13,7 @@ class World:
             self.__events = events
         else:
             self.__events = events
-        
+
         if stocks == None:
             self.__stocks = self.load_stocks()
         else:
@@ -56,6 +56,12 @@ class World:
 
 
     def read_news(news = None):
+        if(news != None):
+            #TODO: If news is none, the method returns a list of news tittles 
+            pass
+        else:
+            #TODO: f news is true the method returns a the article of the news n question
+            pass
         return "this is a news!!!"
     
 
