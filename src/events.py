@@ -25,7 +25,7 @@ class Events:
     
     # self.__stocks_company:dict = {"ArabOilCompany": "Oil", "Doors": "Software", "Edison": "Electricity", 
     #                               "GamePause": "VideoGames", "mvidia": "PC Components", 
-    #                          "pear": "Smartphones", "usWeapons": "Guns" }
+    #                               "pear": "Smartphones", "usWeapons": "Guns" }
   
     
   def get_event_name(self):
