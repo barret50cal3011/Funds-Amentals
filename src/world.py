@@ -83,6 +83,8 @@ class World:
         if random_event.get_state() == "Active":
             random_event.set_percentage(random.uniform(-5, 5))
             random_event.affect_stocks(self.__stocks)
+        
+        self.__current_event = random_event
 
 
     def see_portfolio(self):
