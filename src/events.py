@@ -4,9 +4,11 @@ import pdb
 # * Commented fuctions were changed (events:dict, events __init__, create_event too)
 
 class Events:
-  def __init__(self, event_name:str, event_duration:float = 0, event_percentage_range:tuple = (0, 0)):
+  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0)):
 
     self.__event_name:str = event_name
+
+    self.__description = i_description
 
     self.__impact:str = "Stable"
 
@@ -30,8 +32,14 @@ class Events:
     
   def get_event_name(self):
     return self.__event_name
-    
-    
+  
+  @property
+  def description(self):
+    if self.__description == None:
+      return "a description"
+    return self.__description  
+  
+
   def get_impact(self):
     return self.__impact
 

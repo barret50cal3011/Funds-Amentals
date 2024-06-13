@@ -13,7 +13,7 @@ class Controller:
                 return self.__world.read_news()
             else:
                 self.__world.read_news(command_split[1])
-        elif command_split[0] == "buy_stocks":
+        elif command_split[0] == "buy_stock":
             if len(command_split) < 3 or command_split[1].isdigit() or not command_split[2].isdigit():
                 raise Exception(textwrap.dedent(
                     """
@@ -23,7 +23,7 @@ class Controller:
                     """
                     ))
             return self.__world.buy_stock(command_split[1], int(command_split[2]))
-        elif command_split[0] == "sell_socks":
+        elif command_split[0] == "sell_sock":
             if len(command_split) < 3:
                 raise Exception(textwrap.dedent(
                     """
