@@ -12,3 +12,15 @@ class AbstractStock(ABC):
     @abstractmethod
     def set_stock_price(self, stock_price: float):
         pass
+
+    @abstractmethod
+    def get_affected_by(self):
+        pass
+
+    @abstractmethod
+    def add_affected_by(self, event_name: str):
+        pass
+
+    @abstractmethod
+    def delete_affected_by(self, event_name: str):
+        pass

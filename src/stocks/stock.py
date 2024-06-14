@@ -4,6 +4,7 @@ class Stock(AbstractStock):
   def __init__(self, stock_price: float , company_name: str):
     self.__stock_price: float = stock_price
     self.company_name: str = company_name
+    self.affected_by:list = []
 
   def get_stock_price(self) -> float:
     return self.__stock_price
@@ -16,3 +17,13 @@ class Stock(AbstractStock):
         print(f'Error: {error}')
     else:
       self.__stock_price = stock_price
+
+  def get_affected_by(self):
+      return self.affected_by
+  
+  def add_affected_by(self, event_name: str):
+      self.affected_by.append(event_name)
+
+  def delete_affected_by(self, event_name: str):
+      self.affected_by.remove(event_name)
+      

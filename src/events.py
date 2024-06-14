@@ -1,7 +1,7 @@
 import random
 import pdb 
 
-# * Commented fuctions were changed (events:dict, events __init__, create_event too)
+
 
 class Events:
   def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0)):
@@ -84,6 +84,22 @@ class Events:
         self.set_impact("go down")
       elif self.__percentage == 0:
         self.set_impact("be stable")
+
+  def affect_stocks(self, stock):
+    if self.__state == "Active":
+      stock.add_affected_by(self.__event_name)
+      stock_price:float = stock.get_stock_price()
+      new_price:float = stock_price * (1 + self.__percentage / 100)
+      stock.set_stock_price(new_price)
+      pdb.set_trace()
+
+
+def affect_stocks(self, stock_list):
+  if self.__state == "Active":
+      for stock in stock_list:
+          stock_price = stock.get_stock_price()
+          new_price = stock_price * (1 + self.__percentage / 100)
+          stock.set_stock_price(new_price)
 
     
 
