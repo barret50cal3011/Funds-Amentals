@@ -13,8 +13,11 @@ class Stock(AbstractStock):
     if stock_price != float:
       try:
         float(stock_price)
+        self.__stock_price = stock_price
+        
       except ValueError as error:
         print(f'Error: {error}')
+
     else:
       self.__stock_price = stock_price
 

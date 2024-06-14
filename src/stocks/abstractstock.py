@@ -4,6 +4,8 @@ class AbstractStock(ABC):
     def __init__(self, stock_price: float, company_name: str):
         self._stock_price: float = stock_price
         self.company_name: str = company_name
+        self.affected_by:list = []
+
 
     @abstractmethod
     def get_stock_price(self) -> float:

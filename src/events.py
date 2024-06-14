@@ -1,5 +1,5 @@
 import random
-import pdb 
+# import pdb 
 
 
 
@@ -85,22 +85,6 @@ class Events:
       elif self.__percentage == 0:
         self.set_impact("be stable")
 
-  def affect_stocks(self, stock):
-    if self.__state == "Active":
-      stock.add_affected_by(self.__event_name)
-      stock_price:float = stock.get_stock_price()
-      new_price:float = stock_price * (1 + self.__percentage / 100)
-      stock.set_stock_price(new_price)
-      pdb.set_trace()
-
-
-def affect_stocks(self, stock_list):
-  if self.__state == "Active":
-      for stock in stock_list:
-          stock_price = stock.get_stock_price()
-          new_price = stock_price * (1 + self.__percentage / 100)
-          stock.set_stock_price(new_price)
-
     
 
   # Depending on the value of self.__state, it changes its value to the opposite
@@ -108,6 +92,7 @@ def affect_stocks(self, stock_list):
     if self.__state == "Inactive":
       self.__state = "Active"
       self.set_timer()
+
       
 
   def state_desactiver(self):
@@ -115,8 +100,13 @@ def affect_stocks(self, stock_list):
       self.__timer -= 1
       if self.__state == "Active" and self.__timer == 0:
         self.__state = "Inactive"
-        
-    
+
+  def affect_stock(self, stock):
+    if self.__state == "Active":
+      stock.add_affected_by(self.__event_name)
+      stock_price:float = stock.get_stock_price()
+      new_price:float = stock_price * (1 + self.__percentage / 100)
+      stock.set_stock_price(stock_price=new_price)    
   
   
   # def change_state(self):
@@ -126,6 +116,15 @@ def affect_stocks(self, stock_list):
   #     self.__state = "Active"
       
 # Select an event randomly
+
+# I imported this part for debbugin
+
+def load_stocks():
+        stocks = {
+            "Doors" : Doors(300),
+            "Edison" : Edison(400)
+        }
+        return stocks
 
 def create_event()->str:
   verificator:bool = True
@@ -137,6 +136,7 @@ def create_event()->str:
       verificator:bool = False
       active_events.append(random_event)
       events.get(random_event).state_activer()
+
       return random_event
 
 
@@ -145,6 +145,7 @@ def desactivate_event()->None:
     events.get(event).state_desactiver()
     events.get(event).change_percentage()
     events.get(event).change_impact()
+
     if event.get(event).get_state == "Inactive":
       active_events.pop(event)
 
@@ -189,6 +190,6 @@ if __name__ == '__main__':
     # * desactivate_event ha de ejecutarse justo despues de pasar a la siguiente semana
     if next_week:
       desactivate_event()
-    pdb.set_trace()
+    # pdb.set_trace()
 
     timer += 1
