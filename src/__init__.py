@@ -28,12 +28,21 @@ def load_stocks():
             "Edison" : Edison(400)
         }
         return stocks
+# i dont know how to change the values inside "def load_stocks""
 hi = load_stocks()
 for affector in hi.values():
-    pdb.set_trace()
+    affector.stock_variation_changer()
     evento.affect_stock(affector)
 
 print(hi.get("Doors").get_stock_price())
 print(hi.get("Edison").get_stock_price())
 
-print(load_stocks().get("Doors").get_stock_price())
+
+for x in range(1):
+    for y in hi.values():
+        y.stock_variation_changer()
+
+# It could be a comand like "help" or "news"
+print(hi.get("Doors").get_stock_variation() )
+
+print(hi.get("Doors").get_stock_price())

@@ -119,13 +119,6 @@ class Events:
 
 # I imported this part for debbugin
 
-def load_stocks():
-        stocks = {
-            "Doors" : Doors(300),
-            "Edison" : Edison(400)
-        }
-        return stocks
-
 def create_event()->str:
   verificator:bool = True
   events_list:list = ["War", "Technology advances", "Accident", 
