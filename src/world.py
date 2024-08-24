@@ -13,7 +13,7 @@ class World:
             self.__events = events
         else:
             self.__events = events
-        
+
         if stocks == None:
             self.__stocks = self.load_stocks()
         else:
@@ -56,6 +56,12 @@ class World:
 
 
     def read_news(news = None):
+        if(news != None):
+            #TODO: If news is none, the method returns a list of news tittles 
+            pass
+        else:
+            #TODO: f news is true the method returns a the article of the news n question
+            pass
         return "this is a news!!!"
     
 
@@ -77,10 +83,16 @@ class World:
         if random_event.get_state() == "Active":
             random_event.set_percentage(random.uniform(-5, 5))
             random_event.affect_stocks(self.__stocks)
+        
+        self.__current_event = random_event
+
+
+    def see_portfolio(self):
+        return self.__player.get_portfolio()
 
 
 if __name__ == '__main__':
-    stocks_list = [Stock(100.0,"Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
+    stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
     player = Player(starting_usd=1000.0)
     world = World(events, stocks_list, player)
     world.run()
