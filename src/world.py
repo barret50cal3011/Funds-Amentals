@@ -1,9 +1,9 @@
 
-from events import events, create_event
-from stocks.stock import Stock
+from src.events.events import events, create_event, all_events_active, desactivate_event
+from stocks_m.stock import Stock
 from Player import Player
-from stocks.doors import Doors
-from stocks.edison import Edison
+from stocks_m.doors import Doors
+from stocks_m.edison import Edison
 import random
 
 class World:
@@ -37,12 +37,12 @@ class World:
         timer = 0
         while timer < 10:
             random_event_name = create_event()
-            random_event = self.events.get(random_event_name)
-            random_event.change_state()
-
-            if random_event.get_state() == "Active":
-                random_event.set_percentage(random.uniform(-5, 5))
-                random_event.affect_stocks(self.stocks)
+            random_event = self.__events.get(random_event_name)
+            
+            if not all_events_active():
+                if random_event.get_state() == "Active":
+                    random_event.set_percentage(random.uniform(-5, 5))
+                    random_event.affect_stocks(self.stocks)
 
             print(f"{random_event_name} is {random_event.get_state()}",
                   f"\nDescription: {random_event.get_description()}",
@@ -78,7 +78,7 @@ class World:
     def next_week(self):
         random_event_name = create_event()
         random_event = self.__events.get(random_event_name)
-        random_event.change_state()
+        
 
         if random_event.get_state() == "Active":
             random_event.set_percentage(random.uniform(-5, 5))
@@ -93,6 +93,6 @@ class World:
 
 if __name__ == '__main__':
     stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
-    player = Player(starting_usd=1000.0)
+    player = Player(i_starting_USD=1000.0)
     world = World(events, stocks_list, player)
     world.run()

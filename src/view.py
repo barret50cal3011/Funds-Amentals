@@ -71,17 +71,18 @@ class View:
     def read(self):
         command = input()
         if not command.split(" ")[0] in self.COMMANDS:
-            print("Command not recognised.")
+            print("Command not recognized.")
         elif command.split(" ")[0] == "help":
             if len(command.split(" ")) == 1:
                 print(self.hlp)
+                
             else:
                 command_split = command.split(" ")[1]
                 print("command")
                 if command_split in self.COMMANDS:
                     print(textwrap.dedent(self.COMMANDS[command_split]))
                 else:
-                    print(f"comand {command_split} not recognized.")
+                    print(f"command {command_split} not recognized.")
                 #TODO
         elif command == "exit":
             return -1
