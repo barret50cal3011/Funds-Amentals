@@ -1,9 +1,9 @@
 import random, json
 import numpy as np
-from abstractstock import AbstractStock
+from stocks_m.abstractstock import AbstractStock
 
-with open('../data/events.json', 'r') as file:
-    json_file = json.load(file)
+# with open('../data/events.json', 'r') as file:
+#     json_file = json.load(file)
 
 
 
@@ -12,7 +12,7 @@ class Stock(AbstractStock):
     self.__stock_price: float = stock_price
     self.__company_name: str = company_name
     self.__std:float = std
-    self.__meand:float = mean
+    self.__mean:float = mean
     self.__affected_by:list = []
     self.__stock_variation:list = []
 
@@ -50,9 +50,9 @@ class Stock(AbstractStock):
       print(f'Error: {error}')
 
   def stock_variation_changer(self):
-    if len(self.__stock_variation) < 20:
+    if len(self.__stock_variation) < 22:
       self.__stock_variation.append(self.__stock_price)
-    elif len(self.__stock_variation) == 20:
+    elif len(self.__stock_variation) == 22:
       self.__stock_variation.pop(0)
   
   #! Not ready need json
@@ -62,10 +62,12 @@ class Stock(AbstractStock):
 
   # This will generates randomly values for each stock
   def stock_price_variation(self):
-    rng = np.random.default_rng(2)
-    volatility_change = rng.random.normal(loc=self.__mean, scale=self.__std)
-    self.__stock_price = self.__stock_price * (1 +  volatility_change/ 100)
-    if self.__affected_by != []:
+    rng = np.random.default_rng()
+    volatility_change = rng.normal(loc=self.__mean, scale=self.__std)
+    self.__stock_price = self.__stock_price * (1 +  volatility_change)
+    self.__stock_price =(round(self.get_stock_price(), 2))
+
+    if len(self.__affected_by) > 0:
       self.event_affect_stock()
     self.stock_variation_changer()
     

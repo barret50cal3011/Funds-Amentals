@@ -43,6 +43,16 @@ while running:
     if(input("Do you wish to continue??\n") == "n"):
         running = False
 
+[
+"events_description": {
+  "War": "A New Conflict has Erupts\nIn a significant escalation of tensions, two countries have entered into open conflict. The hostilities began following a series of incidents that heightened diplomatic strains. This will affect {}, making the value of their actions {}. International leaders are calling for an immediate ceasefire and diplomatic negotiations to resolve the crisis.",
+  "Technology Advances": "Breakthrough in Technology Announced \nScientists and engineers have announced a groundbreaking advancement. The new technology promises to revolutionize some process and will optimize others making some products of enterprises better, this could inside the value of stock of {} {}. Experts believe this innovation could have far-reaching implications and pave the way for future developments.",
+  "Accident": "Major Accident has occurred\nAuthorities are investigating the cause of the accident, this will have a high repercussion on the confident of the population and investors in {}, this could make their stocks values go down. The enterprise wait to solve this as fast as possible and are asking for calm for their investors",
+  "Seasons": "Season Arrives \nThe arrival of a new season brings a change in weather and activities. Residents are enjoying this because they could do many activities with their family, meanwhile local businesses prepare for the seasonal shift, making offers and waiting for the possible sales for this season. This could influence the sales from {} and in their stocks, making her value {}. Meteorologists predict in the coming weeks, encouraging everyone to make the most of the season.",
+  "Natural Disasters": "Overwhelming Natural Disaster \nA powerful natural disaster struck unexpectedly close to {} buildings, causing widespread destruction and loss of life. This will affect his operations and could impact in their stock values, making them go down.Rescue teams are working tirelessly to assist those affected, while relief efforts are being coordinated to provide essential supplies and support.",
+  "Social Media": "New Social Media Trend Takes by Storm \nA new trend has emerged on social media, captivating users worldwide. It has garnered millions of views and participation from celebrities and influencers. Experts suggest that this trend could influence about the perception that people has in {}, having a  high impact in their stock values making them {}; the experts highlighting the power of social media in shaping public discourse and entertainment."
+ }
+]
 
 events = {'events': events_trends, 'events_description': events_description}
 

@@ -1,9 +1,9 @@
 import random, json
 
-with open('../data/events.json', 'r') as file:
-    events = json.load(file)
+# with open('../data/events.json', 'r') as file:
+#     json_file = json.load(file)
 
-import pdb
+
 
 
 
@@ -116,28 +116,28 @@ class Events:
         self.__state = "Inactive"
 # ______________________________________________________________________________________________________________________________________
 
-def create_event()->str:
-  verificator:bool = True
-  events_list:list = ["War", "Technology Advances", "Accident", 
-                    "Seasons", "Natural Disasters", "Social Media"]  
+# def create_event()->str:
+#   verificator:bool = True
+#   events_list:list = ["War", "Technology Advances", "Accident", 
+#                     "Seasons", "Natural Disasters", "Social Media"]  
   
-  while verificator:
-    random_event:str = random.choice(events_list)
-    if events.get(random_event).get_state() == "Inactive":
-      verificator:bool = False
-      events.get(random_event).state_activer()
-      return random_event
+#   while verificator:
+#     random_event:str = random.choice(events_list)
+#     if events.get(random_event).get_state() == "Inactive":
+#       verificator:bool = False
+#       events.get(random_event).state_activer()
+#       return random_event
     
 
-def all_events_active():
-  for event in events.values():
-    if event.get_state() == "Inactive":
-      return False
-  return True
+# def all_events_active():
+#   for event in events.values():
+#     if event.get_state() == "Inactive":
+#       return False
+#   return True
 
-def desactivate_event()->None:
-  for event in events.values():
-    if event.get_state() == "Active":
-      event.state_desactiver()
-      event.change_percentage()
-      event.change_impact()
+# def desactivate_event()->None:
+#   for event in events.values():
+#     if event.get_state() == "Active":
+#       event.state_desactiver()
+#       event.change_percentage()
+#       event.change_impact()
