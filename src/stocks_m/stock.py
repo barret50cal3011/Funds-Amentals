@@ -15,6 +15,7 @@ class Stock(AbstractStock):
     self.__mean:float = mean
     self.__affected_by:list = []
     self.__stock_variation:list = []
+    
 
   def get_company_name(self) -> float:
     return self.__company_name
