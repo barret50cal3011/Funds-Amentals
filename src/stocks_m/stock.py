@@ -22,13 +22,7 @@ class Stock(AbstractStock):
   def get_stock_price(self) -> float:
     return self.__stock_price
   
-  def get_stock_variation(self):
-    return self.__stock_variation
-
-  def get_affected_by(self):
-    return self.__affected_by
-  
-  def set_stock_price(self, stock_price: float):
+  def set_stock_price(self, stock_price: float) -> None:
     if stock_price != float:
       try:
         float(stock_price)
@@ -39,31 +33,39 @@ class Stock(AbstractStock):
 
     else:
       self.__stock_price = stock_price
+
   
-  def add_affected_by(self, event_name: str):
+  def get_stock_variation(self) -> list:
+    return self.__stock_variation
+
+  def get_affected_by(self) -> list:
+    return self.__affected_by
+  
+  
+  def add_affected_by(self, event_name: str) -> None:
     self.__affected_by.append(event_name)
 
-  def delete_affected_by(self, event_name: str):
+  def delete_affected_by(self, event_name: str) -> None:
     try:
       self.__affected_by.remove(event_name)
     except ValueError as error:
       print(f'Error: {error}')
 
-  def stock_variation_changer(self):
+  def stock_variation_changer(self) -> None:
     if len(self.__stock_variation) < 22:
       self.__stock_variation.append(self.__stock_price)
     elif len(self.__stock_variation) == 22:
       self.__stock_variation.pop(0)
   
   #! Not ready need json
-  def event_affect_stock(self):
+  def event_affect_stock(self) -> None:
     pass
 
 
   # This will generates randomly values for each stock
-  def stock_price_variation(self):
+  def stock_price_variation(self) -> None:
     rng = np.random.default_rng()
-    volatility_change = rng.normal(loc=self.__mean, scale=self.__std)
+    volatility_change = rng.normal(loc=self.__mean, scale=self.__std, size=1)
     self.__stock_price = self.__stock_price * (1 +  volatility_change)
     self.__stock_price =(round(self.get_stock_price(), 2))
 
