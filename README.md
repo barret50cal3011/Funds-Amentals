@@ -27,8 +27,9 @@ We decide to make an
 `abstractstock` class trying to prepare the class father which stocks will inherit and trying to create a blueprint for another class that could be similar to stocks (but it is in discussion).
 
 ```mermaid
-classDiagram{
-class AbstractStock {
+classDiagram
+
+    class AbstractStock {
         -stock_price: float
         -company_name: str
         -affected_by: list
@@ -58,7 +59,7 @@ class AbstractStock {
         +stock_price_variation() 
     }
 AbstractStock <|-- Stock
-}
+
 ```
 
 
