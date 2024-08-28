@@ -82,27 +82,6 @@ classDiagram
         +stock_price_variation() 
     }
 
-    class ArabOilCompany {
-    }
-
-    class Doors {
-    }
-
-    class Edison {
-    }
-
-    class GamePause {
-    }
-
-    class Mvidia {
-    }
-
-    class Pear {
-    }
-
-    class USWeapons {
-    }
-
     class Controller {
         -world: World
         +eval_comad(command: str) 
@@ -137,13 +116,6 @@ classDiagram
 
     EventsStore --> Events
     AbstractStock <|-- Stock
-    Stock <|-- ArabOilCompany
-    Stock <|-- Doors
-    Stock <|-- Edison
-    Stock <|-- GamePause
-    Stock <|-- Mvidia
-    Stock <|-- Pear
-    Stock <|-- USWeapons
     Controller --> World
     Player --> Stock
     View --> Controller
