@@ -114,14 +114,14 @@ classDiagram
         +see_portfolio() 
     }
 
-    EventsStore --> Events
+    EventsStore *-- Events
     AbstractStock <|-- Stock
     Controller --> World
-    Player --> Stock
-    View --> Controller
-    World --> Events
-    World --> Stock
-    World --> Player
+    Player --* Stock
+    View <-- Controller
+    World *-- Events
+    World *-- Stock
+    World *-- Player
 
 ```
 
