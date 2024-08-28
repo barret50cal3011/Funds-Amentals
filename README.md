@@ -116,9 +116,9 @@ classDiagram
 
     EventsStore *-- Events
     AbstractStock <|-- Stock
-    Controller --> World
+    View --* World
     Player --* Stock
-    View <-- Controller
+    View *-- Controller
     World *-- Events
     World *-- Stock
     World *-- Player
