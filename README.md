@@ -121,10 +121,13 @@ stock_price =(round(stock_price, 2)) # And change this will be stored in stock_v
 
 This is the place were `stocks` and `events` use to act, so this will be compound by `events` and `stocks`, also, this will have to some functions and methods that regulate the behavior of `events` and `stocks` and how they will interact, one of these functions has to create the objects `events` and `stocks` for starting the games, so, we decide save the information that this objects need in a JSON, and import this data to `world`.
 
+### Events Storer
+
 Also, we are planning to add a structure that will store and manage `events` objects for making it easier to world, so, we create a new class called `events_storer` that will make this work, taking of functions to world, making it easier to modify and update.
 
+# Player
 
-In `World` there is one thing that we are missing and is the player, so, we decide to create a `player` class that will define the portfolio that the player have (this inherits from `stocks`). 
+In `World` there is one thing that we are missing and is the player, so, we decide to create a `player` class that will define the portfolio that the player have, this portfolio is compound by `stocks`, it means, here is the place in which the player save and see the stocks that he own. 
 
 ### How player will interact with the program?
 
