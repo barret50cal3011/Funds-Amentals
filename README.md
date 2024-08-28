@@ -15,6 +15,9 @@ Since the problem is a lack of knowledge on how stock markets work and games hav
 ## Class diagram
 ```mermaid
 classDiagram
+    class events{
+        +jsondata
+    }
     class Events {
         -event_name: str
         -description: str
@@ -122,6 +125,7 @@ classDiagram
     World *-- Events
     World *-- Stock
     World *-- Player
+    events ..> World : Dependency
 
 ```
 
