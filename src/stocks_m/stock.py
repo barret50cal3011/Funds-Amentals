@@ -42,6 +42,9 @@ class Stock(AbstractStock):
   def get_affected_by(self) -> list:
     return self.__affected_by
   
+  # Will return daily volatility
+  def get_volatility(self) -> float:
+    return round((self.__std * 100), 2)
   
   def add_affected_by(self, event_name: str) -> None:
     self.__affected_by.append(event_name)

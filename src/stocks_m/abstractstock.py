@@ -30,6 +30,10 @@ class AbstractStock(ABC):
         pass
     
     @abstractmethod
+    def get_volatility(self) -> float:
+        pass
+    
+    @abstractmethod
     def add_affected_by(self, event_name: str) -> None:
         pass
     

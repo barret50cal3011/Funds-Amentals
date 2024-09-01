@@ -8,11 +8,13 @@ import random, json
 
 
 class Events:
-  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:'Stocks' = None):
+  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:'Stocks' = None, active: str = None):
 
     self.__event_name:str = event_name
 
-    self.__description = i_description
+    self.__stock_active:str = active
+    
+    self.__description = i_description.format(self.__event_name, self.__stock_active)
 
     self.__impact:str = "Stable"
 
@@ -84,8 +86,8 @@ class Events:
     if self.__state == "Active":
       # gets the tuple and takes his start and ending value
       # for using it to decide the percentage value
-      starts:int = self.get_event_percentage_range()[0]
-      ends:int = self.get_event_percentage_range()[1]
+      starts:int = self.__event_percentage_range[0]
+      ends:int = self.__event_percentage_range[1]
       percentage = (random.uniform(starts, ends))
       self.set_percentage(percentage=percentage)
 
