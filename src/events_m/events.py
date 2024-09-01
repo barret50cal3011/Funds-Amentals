@@ -37,7 +37,7 @@ class Events:
     #                               "pear": "Smartphones", "usWeapons": "Guns" }
   
     
-  def get_event_name(self):
+  def get_event_name(self) -> str:
     return self.__event_name
   
   @property
@@ -47,49 +47,51 @@ class Events:
     return self.__description  
   
 
-  def get_impact(self):
+  def get_impact(self) -> str:
     return self.__impact
 
-  def get_percentage(self):
+  def get_percentage(self) -> float:
     return self.__percentage
 
-  def get_state(self):
+  def get_state(self) -> str:
     return self.__state
   
-  def get_timer(self):
+  def get_timer(self) -> float:
     return self.__timer
   
-  def get_event_duration(self):
+  def get_event_duration(self) -> float:
     return self.__event_duration
   
-  def get_event_percentage_range(self):
-    return self.__event_percentage_range
+  # ! Posible elimination 
+  # def get_event_percentage_range(self):
+  #   return self.__event_percentage_range
   
-  def set_timer(self):
+  def set_timer(self) -> None:
     self.__timer = self.__event_duration
 
-  def set_impact(self, impact:str):
+  def set_impact(self, impact:str) -> None:
     self.__impact = impact
 
-  def set_percentage(self, percentage:float):
-    self.__percentage = percentage
+
+  # ! Posible elimination 
+  # def set_percentage(self, percentage:float):
+  #   self.__percentage = percentage
   
-  def change_percentage(self):  
+
+
+  # Based on a tuple that has percentages, it will selects the tendence of the event 
+  def tendence_selector(self) -> None:  
     if self.__state == "Active":
       # gets the tuple and takes his start and ending value
       # for using it to decide the percentage value
       starts:int = self.get_event_percentage_range()[0]
       ends:int = self.get_event_percentage_range()[1]
       percentage = (random.uniform(starts, ends))
-
       self.set_percentage(percentage=percentage)
-      
-    elif self.__state == "Inctive":
-      self.set_percentage(percentage=0)
 
   # Depending of the percentage's value, it has 3 options
 
-  def change_impact(self):
+  def change_impact(self) -> None:
     if self.__state == "Active":
       if self.__percentage > 0:
         self.set_impact("go up")
@@ -98,23 +100,32 @@ class Events:
       elif self.__percentage == 0:
         self.set_impact("be stable")
 
+    elif self.__state == "Inactive":
+      self.set_impact("be stable")
+
     
 
   # Depending on the value of self.__state, it changes its value to the opposite
   # This will be in world, this is an aproximation
-  def state_activer(self):
+  def state_activer(self) -> None:
     if self.__state == "Inactive":
       self.__state = "Active"
       self.set_timer()
+      self.tendence_selector()
+      self.change_impact()
 
       
 
-  def state_desactiver(self):
+  def state_desactiver(self) -> None:
     if self.__state == "Active" and self.__timer != 0:
       self.__timer -= 1
       if self.__state == "Active" and self.__timer == 0:
         self.__state = "Inactive"
+        self.set_percentage(percentage=0)
+        self.change_impact()
+        
 # ______________________________________________________________________________________________________________________________________
+# ! will be eliminate
 
 # def create_event()->str:
 #   verificator:bool = True
@@ -128,13 +139,14 @@ class Events:
 #       events.get(random_event).state_activer()
 #       return random_event
     
-
+# ! will be eliminate
 # def all_events_active():
 #   for event in events.values():
 #     if event.get_state() == "Inactive":
 #       return False
 #   return True
 
+# ! will be eliminate
 # def desactivate_event()->None:
 #   for event in events.values():
 #     if event.get_state() == "Active":

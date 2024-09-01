@@ -52,27 +52,31 @@ class Stock(AbstractStock):
     except ValueError as error:
       print(f'Error: {error}')
 
-  def stock_variation_changer(self) -> None:
+  def stock_variation_storer(self) -> None:
     if len(self.__stock_variation) < 22:
       self.__stock_variation.append(self.__stock_price)
     elif len(self.__stock_variation) == 22:
       self.__stock_variation.pop(0)
   
-  #! Not ready need json
-  def event_affect_stock(self) -> None:
-    pass
+
+  def event_affect_stock(self, event) -> None:
+    self.__stock_price = self.__stock_price(1 + event.get_percentage())
 
 
-  # This will generates randomly values for each stock
+  # This will generates randomly values for each stock and apply the tendence in case the conditional be True
   def stock_price_variation(self) -> None:
+
+    # Creates a instance of a random number generator
     rng = np.random.default_rng()
+    # Generates a random number in percentage that will affect stock price
     volatility_change = rng.normal(loc=self.__mean, scale=self.__std, size=1)
     self.__stock_price = self.__stock_price * (1 +  volatility_change)
     self.__stock_price =(round(self.get_stock_price(), 2))
 
     if len(self.__affected_by) > 0:
-      self.event_affect_stock()
-    self.stock_variation_changer()
+      for event in self.__affected_by:
+        self.event_affect_stock(event=event)
+    self.stock_variation_storer()
     
 
 
