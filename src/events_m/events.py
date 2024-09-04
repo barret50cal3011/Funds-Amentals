@@ -1,10 +1,4 @@
-import random, json
-
-# with open('../data/events.json', 'r') as file:
-#     json_file = json.load(file)
-
-
-
+import random
 
 
 class Events:
@@ -48,7 +42,6 @@ class Events:
       return "a description"
     return self.__description  
   
-
   def get_impact(self) -> str:
     return self.__impact
 

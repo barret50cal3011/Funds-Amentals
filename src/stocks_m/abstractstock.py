@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
 
 class AbstractStock(ABC):
-    def __init__(self, stock_price: float, company_name: str, std: float = None, mean: float = None):
+    def __init__(self, stock_price: float, company_name: str, std: float = None, mean: float = None, description: str = None):
         self.stock_price: float = stock_price
         self.company_name: str = company_name
         self.std:float = std
         self.mean:float = mean
         self.affected_by:list = []
         self.stock_variation:list = []
+        self.__stock_description: str = description
 
     @abstractmethod
     def get_company_name(self) -> float:
@@ -31,6 +32,10 @@ class AbstractStock(ABC):
     
     @abstractmethod
     def get_volatility(self) -> float:
+        pass
+
+    @abstractmethod
+    def get_stock_description(self) -> str:
         pass
     
     @abstractmethod

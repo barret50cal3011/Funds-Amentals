@@ -1,20 +1,16 @@
-import random, json
 import numpy as np
 from stocks_m.abstractstock import AbstractStock
 
-# with open('../data/events.json', 'r') as file:
-#     json_file = json.load(file)
-
-
 
 class Stock(AbstractStock):
-  def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None):
+  def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None):
     self.__stock_price: float = stock_price
     self.__company_name: str = company_name
-    self.__std:float = std
-    self.__mean:float = mean
-    self.__affected_by:list = []
-    self.__stock_variation:list = []
+    self.__std: float = std
+    self.__mean: float = mean
+    self.__affected_by: list = []
+    self.__stock_variation: list = []
+    self.__stock_description: str = description
     
 
   def get_company_name(self) -> float:
@@ -45,7 +41,10 @@ class Stock(AbstractStock):
   # Will return daily volatility
   def get_volatility(self) -> float:
     return round((self.__std * 100), 2)
-  
+
+  def get_stock_description(self) -> str:
+    return self.__stock_description
+
   def add_affected_by(self, event_name: str) -> None:
     self.__affected_by.append(event_name)
 
