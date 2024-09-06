@@ -3,7 +3,8 @@ from stocks_m.abstractstock import AbstractStock
 
 
 class Stock(AbstractStock):
-  def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None):
+  def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None, actives: float = None):
+    super().__init__(stock_price, company_name, std, mean, description, actives)
     self.__stock_price: float = stock_price
     self.__company_name: str = company_name
     self.__std: float = std
@@ -11,6 +12,7 @@ class Stock(AbstractStock):
     self.__affected_by: list = []
     self.__stock_variation: list = []
     self.__stock_description: str = description
+    self.__actives: str = actives
     
 
   def get_company_name(self) -> float:
@@ -44,6 +46,9 @@ class Stock(AbstractStock):
 
   def get_stock_description(self) -> str:
     return self.__stock_description
+  
+  def get_actives(self) -> float:
+    return self.__actives
 
   def add_affected_by(self, event_name: str) -> None:
     self.__affected_by.append(event_name)

@@ -2,13 +2,15 @@ import random
 
 
 class Events:
-  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:'Stocks' = None, active: str = None):
+  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:'Stock' = None):
 
     self.__event_name:str = event_name
 
-    self.__stock_active:str = active
+    self.__stock_actives:str = affected_stock.get_actives()
+
+    self.__stock_name = affected_stock.get_company_name()
     
-    self.__description = i_description.format(self.__event_name, self.__stock_active)
+    self.__description = i_description.format(self.__stock_name, self.__stock_actives)
 
     self.__impact:str = "Stable"
 
