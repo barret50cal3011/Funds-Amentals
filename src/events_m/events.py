@@ -122,7 +122,7 @@ class Events:
         self.change_impact()
         
 # ______________________________________________________________________________________________________________________________________
-# ! will be eliminate
+# ! will be eliminate and add to world
 
 # def create_event()->str:
 #   verificator:bool = True
@@ -136,14 +136,14 @@ class Events:
 #       events.get(random_event).state_activer()
 #       return random_event
     
-# ! will be eliminate
+# ! will be eliminate and add to world
 # def all_events_active():
 #   for event in events.values():
 #     if event.get_state() == "Inactive":
 #       return False
 #   return True
 
-# ! will be eliminate
+# ! will be eliminate and add to world
 # def desactivate_event()->None:
 #   for event in events.values():
 #     if event.get_state() == "Active":

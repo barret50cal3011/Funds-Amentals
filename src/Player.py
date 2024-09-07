@@ -1,4 +1,4 @@
-from stocks.stock import Stock
+from stocks_m.stock import Stock
 
 class Player:
     def __init__(self, i_starting_USD) -> None:

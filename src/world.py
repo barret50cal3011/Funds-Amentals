@@ -1,9 +1,7 @@
 
-from src.events.events import events, create_event, all_events_active, desactivate_event
+from src.events_m.events import events
 from stocks_m.stock import Stock
 from Player import Player
-from stocks_m.doors import Doors
-from stocks_m.edison import Edison
 import random
 
 class World:
@@ -27,8 +25,8 @@ class World:
 
     def load_stocks(self):
         stocks = {
-            "Doors" : Doors(300),
-            "Edison" : Edison(400)
+            "Doors" : Stock(300),
+            "Edison" : Stock(400)
         }
         return stocks
 
