@@ -1,9 +1,9 @@
-from stocks.stock import Stock
+from stocks_m.stock import Stock
 
 class Player:
     def __init__(self, i_starting_USD) -> None:
         self.__player_portfolio = {}
-        self.__player_portfolio["USD"] = i_starting_USD;
+        self.__player_portfolio["USD"] = i_starting_USD
 
 
     def buy_stock(self, stock: Stock, quantity: int) -> None:
