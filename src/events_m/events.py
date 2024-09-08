@@ -2,15 +2,15 @@ import random
 
 
 class Events:
-  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:'Stock' = None):
+  def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:str = None, actives:str = None):
 
     self.__event_name:str = event_name
 
-    self.__stock_actives:str = affected_stock.get_actives()
+    self.__stock_actives:str = affected_stock
 
-    self.__stock_name = affected_stock.get_company_name()
+    self.__stock_name:str = actives
     
-    self.__description = i_description.format(self.__stock_name, self.__stock_actives)
+    self.__description:str = i_description.format(self.__stock_name, self.__stock_actives)
 
     self.__impact:str = "Stable"
 
@@ -83,7 +83,7 @@ class Events:
       # for using it to decide the percentage value
       starts:int = self.__event_percentage_range[0]
       ends:int = self.__event_percentage_range[1]
-      percentage = (random.uniform(starts, ends))
+      percentage = ((random.uniform(starts, ends))/100)
       self.set_percentage(percentage=percentage)
 
   # Depending of the percentage's value, it has 3 options
@@ -121,32 +121,3 @@ class Events:
         self.set_percentage(percentage=0)
         self.change_impact()
         
-# ______________________________________________________________________________________________________________________________________
-# ! will be eliminate and add to world
-
-# def create_event()->str:
-#   verificator:bool = True
-#   events_list:list = ["War", "Technology Advances", "Accident", 
-#                     "Seasons", "Natural Disasters", "Social Media"]  
-  
-#   while verificator:
-#     random_event:str = random.choice(events_list)
-#     if events.get(random_event).get_state() == "Inactive":
-#       verificator:bool = False
-#       events.get(random_event).state_activer()
-#       return random_event
-    
-# ! will be eliminate and add to world
-# def all_events_active():
-#   for event in events.values():
-#     if event.get_state() == "Inactive":
-#       return False
-#   return True
-
-# ! will be eliminate and add to world
-# def desactivate_event()->None:
-#   for event in events.values():
-#     if event.get_state() == "Active":
-#       event.state_desactiver()
-#       event.change_percentage()
-#       event.change_impact()

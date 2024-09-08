@@ -2,7 +2,7 @@ import random
 from events_m.events import Events
 
 class EventsStorer:
-    def __init__(self,name:str = None, sons_list:list = []):
+    def __init__(self, name:str = None, sons_list:list = []):
         self.__name = name
         self.__sons_list = sons_list
         self.__sons_active_list = []
