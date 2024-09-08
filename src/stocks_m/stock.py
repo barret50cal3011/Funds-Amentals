@@ -3,10 +3,10 @@ import mplfinance as mpf
 import numpy as np
 from stocks_m.abstractstock import AbstractStock
 from events_m.events import Events
-import time 
+import time
 
 class Stock(AbstractStock):
-  def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None, actives: float = None):
+  def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None, actives: str = None):
     super().__init__(stock_price, company_name, std, mean, description, actives)
     self.__stock_price: float = stock_price
     self.__company_name: str = company_name

@@ -1,9 +1,9 @@
 import random
 from typing import Optional
-from events_m.events import Events
+from src.events_m.events import Events
 from stocks_m.stock import Stock
 from Player import Player
-from events_m.events_storer import EventsStorer
+from src.events_m.events_storer import EventsStorer
 
 
 class World:

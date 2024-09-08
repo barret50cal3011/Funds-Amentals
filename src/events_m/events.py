@@ -29,6 +29,7 @@ class Events:
 
     self.affected_stock:str = affected_stock
 
+    
     # self.__stocks_company:dict = {"ArabOilCompany": "Oil", "Doors": "Software", "Edison": "Electricity", 
     #                               "GamePause": "VideoGames", "mvidia": "PC Components", 
     #                               "pear": "Smartphones", "usWeapons": "Guns" }
@@ -119,3 +120,4 @@ class Events:
         self.__state = "Inactive"
         self.set_percentage(percentage=0)
         self.change_impact()
+        
