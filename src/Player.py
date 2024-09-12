@@ -4,7 +4,11 @@ class Player:
     def __init__(self, i_starting_USD) -> None:
         self.__player_portfolio = {}
         self.__player_portfolio["USD"] = i_starting_USD
-
+        self.__player_stock_price_buy = {"Edison": 0, "ArabOilCompany": 0, "Doors":  0, "GamePause":  0, "Mvidia":  0, "Pear":  0, 'USWeapons':  0}
+        
+    @property
+    def player_balance_money(self):
+        return self.__player_portfolio["USD"]
 
     def buy_stock(self, stock: Stock, quantity: int) -> None:
         if(quantity * stock.get_stock_price() > self.__player_portfolio["USD"]):
