@@ -12,7 +12,7 @@ class AbstractStock(ABC):
         self.actives: str = actives
 
     @abstractmethod
-    def get_company_name(self) -> float:
+    def get_company_name(self) -> str:
         pass
     
     @abstractmethod
@@ -40,7 +40,7 @@ class AbstractStock(ABC):
         pass
 
     @abstractmethod
-    def get_company_active(self) -> float:
+    def get_company_active(self) -> str:
         pass
     
     @abstractmethod
@@ -51,10 +51,6 @@ class AbstractStock(ABC):
     def delete_affected_by(self, event_name: str) -> None:
         pass
     
-    @abstractmethod
-    def stock_variation_changer(self) -> None:
-        pass    
-
     @abstractmethod
     def event_affect_stock(self) -> None:
         pass
