@@ -1,6 +1,5 @@
 import random
 
-
 class Events:
   def __init__(self, event_name:str, i_description:str = None ,event_duration:float = 0, event_percentage_range:tuple = (0, 0), affected_stock:str = None, actives:str = None):
 

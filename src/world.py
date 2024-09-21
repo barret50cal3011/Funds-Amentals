@@ -1,14 +1,16 @@
 import random
 from typing import Optional
-from src.events_m.events import Events
+from events_m.events import Events
 from stocks_m.stock import Stock
 from Player import Player
-from src.events_m.events_storer import EventsStorer
-
+from events_m.events_storer import EventsStorer
+from newtimer import Time
 
 class World:
 
     def __init__(self, events:Optional[dict] = None, stocks:Optional[dict] = None, player:Optional[Player] = None):
+        self.global_time = Time(start_date="2024-01-01")
+        
         if events == None:
             self.__events:dict = events.load_events()
         else:
@@ -27,8 +29,8 @@ class World:
 
     def load_stocks(self):
         stocks = {
-            "Doors" : Stock(300, "Doors", 0.5, 0.5, "Description", "Software"),
-            "Edison" : Stock(400, "Edison", 0.5, 0.5, "Description", "Electricity")
+            "Doors" : Stock(300, "Doors", 0.5, 0.5, "Description", "Software", self.global_time),
+            "Edison" : Stock(400, "Edison", 0.5, 0.5, "Description", "Electricity",self.global_time)
         }
         return stocks
 
