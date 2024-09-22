@@ -29,20 +29,70 @@ class World:
 
     def load_stocks(self):
         stocks = {
-            "Doors" : Stock(300, "Doors", 0.5, 0.5, "Description", "Software", self.global_time),
-            "Edison" : Stock(400, "Edison", 0.5, 0.5, "Description", "Electricity",self.global_time)
+            "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.global_time),
+            "Edison": Stock(650, "Edison", 0.6, 0.7, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.global_time),
+            "Game pause": Stock(200, "Game pause", 0.7, 0.6, "Retail and gaming company, sells video games and gaming consoles.", "Retail", self.global_time),
+            "ArabOilCompany": Stock(850, "ArabOilCompany", 0.4, 0.5, "Oil company, sells crude oil and petroleum products.", "Oil", self.global_time),
+            "MVidia": Stock(500, "MVidia", 0.5, 0.5, "Semiconductor and GPU technology company, sells graphic processing units and AI chips.", "Technology", self.global_time),
+            "Pear": Stock(700, "Pear", 0.4, 0.5, "Consumer electronics company, sells smartphones, tablets, and computers.", "Technology", self.global_time),
+            "USWeapons": Stock(900, "USWeapons", 0.3, 0.6, "Defense and aerospace company, sells weapons systems and military aircraft.", "Defense", self.global_time)
         }
         return stocks
 
     def load_events(self):
+        '''
         event_son_first_w = Events("War", "Description", 5, (-5, 5), "Edison", "Electricity")
         events_son_two_w = Events("War", "Description", 5, (-5, 5), "Doors", "Software")
         events_son_two_T = Events("Technology Advances", "Description", 5, (-5, 5), "Doors", "Software")
+        '''
+        event_son_w_1 = Events("War", "Conflict affecting electricity sector", 365, (-15, -5), "Edison", "Electricity")
+        event_son_w_2 = Events("War", "Conflict affecting software industry", 365, (3, 10), "Doors", "Software")
+        event_son_w_3 = Events("War", "Conflict affecting consumer electronics", 365, (-10, -3), "Pear", "Technology")
+        event_son_w_4 = Events("War", "Conflict affecting oil industry", 365, (5, 15), "ArabOilCompany", "Oil")
+        event_son_w_5 = Events("War", "Conflict affecting defense sector", 365, (10, 20), "USWeapons", "Defense")
+        event_son_w_6 = Events("War", "Conflict affecting retail and gaming", 365, (-15, -5), "Game pause", "Retail")
+        event_son_w_7 = Events("War", "Conflict affecting semiconductor industry", 365, (5, 15), "MVidia", "Technology")
+        
+        event_son_a_1 = Events("Accident", "Accident affecting electricity infrastructure", 7, (-15, -5), "Edison", "Electricity")
+        event_son_a_2 = Events("Accident", "Accident affecting software development", 7, (-10, -5), "Doors", "Software")
+        event_son_a_3 = Events("Accident", "Accident affecting consumer electronics production", 7, (-10, -5), "Pear", "Technology")
+        event_son_a_4 = Events("Accident", "Accident affecting oil production", 7, (-20, -10), "ArabOilCompany", "Oil")
+        event_son_a_5 = Events("Accident", "Accident affecting defense supply chain", 7, (-10, -5), "USWeapons", "Defense")
+        event_son_a_6 = Events("Accident", "Accident affecting gaming retail chain", 7, (-10, -5), "Game pause", "Retail")
+        event_son_a_7 = Events("Accident", "Accident affecting semiconductor industry", 7, (-10, -5), "MVidia", "Technology")
 
-        dad_w = EventsStorer("War", [event_son_first_w, events_son_two_w])
-        dad_t = EventsStorer("Technology Advances", [events_son_two_T])
+        event_son_ta_1 = Events("Technology Advances", "Advances in electricity production", 60, (10, 20), "Edison", "Electricity")
+        event_son_ta_2 = Events("Technology Advances", "Advances in software development", 60, (5, 15), "Doors", "Software")
+        event_son_ta_3 = Events("Technology Advances", "Advances in consumer electronics", 60, (5, 15), "Pear", "Technology")
+        event_son_ta_4 = Events("Technology Advances", "Advances in oil extraction technology", 60, (-10, -5), "ArabOilCompany", "Oil")
+        event_son_ta_5 = Events("Technology Advances", "New defense systems", 60, (5, 15), "USWeapons", "Defense")
+        event_son_ta_6 = Events("Technology Advances", "Breakthroughs in gaming technology", 60, (5, 20), "Game pause", "Retail")
+        event_son_ta_7 = Events("Technology Advances", "New semiconductor technologies", 60, (10, 20), "MVidia", "Technology")
 
-        events = {"Random": [{dad_w: 0.40}, {dad_t: 0.60}]}
+        event_son_nd_1 = Events("Natural Disasters", "Hurricane affecting electricity", 14, (-10, -5), "Edison", "Electricity")
+        event_son_nd_2 = Events("Natural Disasters", "Earthquake affecting software infrastructure", 14, (-8, -3), "Doors", "Software")
+        event_son_nd_3 = Events("Natural Disasters", "Flood affecting consumer electronics", 14, (-8, -3), "Pear", "Technology")
+        event_son_nd_4 = Events("Natural Disasters", "Tornado affecting oil production", 14, (-15, -5), "ArabOilCompany", "Oil")
+        event_son_nd_5 = Events("Natural Disasters", "Storm affecting defense logistics", 14, (-8, -3), "USWeapons", "Defense")
+        event_son_nd_6 = Events("Natural Disasters", "Wildfire affecting retail sector", 14, (-10, -5), "Game pause", "Retail")
+        event_son_nd_7 = Events("Natural Disasters", "Blizzard affecting semiconductor manufacturing", 14, (-8, -3), "MVidia", "Technology")
+
+        event_son_sm_1 = Events("Social Media", "Social media buzz affecting electricity sector", 7, (-10, 10), "Edison", "Electricity")
+        event_son_sm_2 = Events("Social Media", "Viral trends affecting software industry", 7, (-5, 5), "Doors", "Software")
+        event_son_sm_3 = Events("Social Media", "New viral tech affecting consumer electronics", 7, (-5, 5), "Pear", "Technology")
+        event_son_sm_4 = Events("Social Media", "Oil-related trends on social media", 7, (-5, 5), "ArabOilCompany", "Oil")
+        event_son_sm_5 = Events("Social Media", "Defense industry discussed on social media", 7, (-5, 5), "USWeapons", "Defense")
+        event_son_sm_6 = Events("Social Media", "Gaming trends going viral", 7, (-20, 20), "Game pause", "Retail")
+        event_son_sm_7 = Events("Social Media", "Social media buzz about semiconductors", 7, (-5, 5), "MVidia", "Technology")
+
+        
+        dad_w = EventsStorer("War", [event_son_w_1, event_son_w_2,event_son_w_3,event_son_w_4,event_son_w_5,event_son_w_6,event_son_w_7])
+        dad_a = EventsStorer("Accident", [event_son_a_1,event_son_a_2,event_son_a_3,event_son_a_4,event_son_a_5,event_son_a_6,event_son_a_7])
+        dad_ta = EventsStorer("Technology Advances", [event_son_ta_1,event_son_ta_2,event_son_ta_3,event_son_ta_4,event_son_ta_5,event_son_ta_6,event_son_ta_7])
+        dad_nd = EventsStorer("Natural Disasters", [event_son_nd_1,event_son_nd_2,event_son_nd_3,event_son_nd_4,event_son_nd_5,event_son_nd_6,event_son_nd_7])
+        dad_sm = EventsStorer("Social Media", [event_son_sm_1,event_son_sm_2,event_son_sm_3,event_son_sm_4,event_son_sm_5,event_son_sm_6,event_son_sm_7])
+
+        events = {"Random": [{dad_w: 0.40}, {dad_a: 0.80}, {dad_ta: 0.60},{dad_nd: 0.60},{dad_sm: 0.30}]}
 
 
         return events
