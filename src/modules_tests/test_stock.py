@@ -1,4 +1,4 @@
-from ..stocks_m.stock import Stock
+from src.stocks_m.stock import Stock
 from src.newtimer import Time
 
 timer = Time(start_date="2024-01-01")

@@ -145,3 +145,7 @@ class Stock(AbstractStock):
         """
         for _ in range(num_days):
             self.stock_price_variation()
+
+
+    def __str__(self):
+        return self.company_name

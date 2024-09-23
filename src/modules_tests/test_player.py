@@ -3,10 +3,30 @@ from src.stocks_m.stock import Stock
 
 if __name__ == "__main__":
     player = Player(1000)
-    stock = Stock("Edison", 100)
-    print(type(stock.get_stock_price()))
-    print(type(player.player_money))
-    print(player.get_portfolio())
-    # print(player.buy_stock(stock, 10))
-    # print(player.get_stock_amount("Edison"))    
+    stock = Stock(100, "Edison")
+    print(stock.get_stock_price())
+    print(player.player_money)
+    print(player)
+    print(player.print_player_balance())
+
+    print(f"Stock price {stock.get_stock_price()}")
+    print("Compra")
+    player.buy_stock(stock, 10)
+    print(player)
+    print(player.print_player_balance())
+
+    stock.set_stock_price(200)
+    print(f"Stock price {stock.get_stock_price()}")
+    print("Vende")
+    player.sell_stock(stock, 1)
+    print(player)
+    print(player.print_player_balance())
+
+    stock.set_stock_price(1)
+    print(f"Stock price {stock.get_stock_price()}")
+    print("Vende")
+    player.sell_stock(stock, 9)
+    print(player)
+    print(player.print_player_balance())
+    
     
