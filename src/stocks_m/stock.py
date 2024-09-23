@@ -2,9 +2,9 @@ import random
 import pandas as pd
 import mplfinance as mpf
 import numpy as np
-from stocks_m.abstractstock import AbstractStock
-from events_m.events import Events
-from newtimer import Time
+from src.stocks_m.abstractstock import AbstractStock
+from src.events_m.events import Events
+from src.newtimer import Time
 
 class Stock(AbstractStock):
     def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None, actives: str = None, time_manager: Time= None):
