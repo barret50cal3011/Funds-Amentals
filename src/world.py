@@ -5,6 +5,7 @@ from stocks_m.stock import Stock
 from Player import Player
 from events_m.events_storer import EventsStorer
 from newtimer import Time
+from news import News
 
 class World:
 
@@ -25,7 +26,7 @@ class World:
             self.__player:Player = Player(i_starting_USD=100000)
         else:
             self.__player = player
-
+        self.news = News(self.__events) 
 
     def load_stocks(self):
         stocks = {
@@ -150,18 +151,35 @@ class World:
             for stock in self.stocks:
                 print(f"{stock.company_name} stock price: {stock.get_stock_price()}")
 
-            timer += 1
-
-
-    def read_news(news = None):
-        if(news != None):
-            #TODO: If news is none, the method returns a list of news tittles 
-            pass
+            timer += 1 
+        
+    def show_news(self):
+        print("Generating news headlines...")
+        headlines = self.news.get_news_titles()
+        if headlines:
+            for headline in headlines:
+                print(headline)
         else:
-            #TODO: f news is true the method returns a the article of the news n question
-            pass
-        return "this is a news!!!"
-    
+            print("No headlines available.")
+
+            
+    def read_news(self, event_name: Optional[str] = None):
+        if event_name:
+            article = self.news.get_news_article(event_name)
+            event = self.__events.get(event_name)
+            if event:
+                affected_stock = event.affected_stock
+            else:
+                affected_stock = "No specific stock affected."
+                
+            if article:
+                print(f"Article for {event_name}:\n{article}\nAffected Stock: {affected_stock}")
+            else:
+                print(f"No articles available for the event: {event_name}")
+        else:
+            print("No specific event provided to display the article.")
+
+
 
     def buy_stock(self, stock_name, amount):
         stock = self.__stocks[stock_name]
@@ -192,5 +210,6 @@ class World:
 if __name__ == '__main__':
     stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
     player = Player(i_starting_USD=1000.0)
+    events=None
     world = World(events, stocks_list, player)
     world.run()

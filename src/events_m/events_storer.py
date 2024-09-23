@@ -38,4 +38,5 @@ class EventsStorer:
         if son[0].get_state() == "Desactive":
             self.__sons_active_list.remove(son)
 
-    
+    def get_active_sons(self):
+        return self.__sons_active_list

@@ -6,7 +6,7 @@ class Controller:
     def __init__(self):
         self.__world = World()
 
-    def eval_comad(self, command):
+    def eval_command(self, command):
         command_split = command.split(" ")
         if command_split[0] == "read_news":
             if(len(command_split) == 1):
@@ -23,7 +23,7 @@ class Controller:
                     """
                     ))
             return self.__world.buy_stock(command_split[1], int(command_split[2]))
-        elif command_split[0] == "sell_sock":
+        elif command_split[0] == "sell_stock":
             if len(command_split) < 3:
                 raise Exception(textwrap.dedent(
                     """
