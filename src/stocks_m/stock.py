@@ -7,20 +7,20 @@ from events_m.events import Events
 from newtimer import Time
 
 class Stock(AbstractStock):
-    def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None, actives: str = None):
+    def __init__(self, stock_price: float = None, company_name: str = None, std: float = None, mean: float = None, description: str = None, actives: str = None, time_manager: Time= None):
         super().__init__(stock_price, company_name, std, mean, description, actives)
         self.__stock_price: float = stock_price
         self.__company_name: str = company_name
         self.__std: float = std  # Standard deviation, used for volatility
         self.__mean: float = mean  # Mean value for stock changes
         self.__affected_by: list = []  # Stores events that affect the stock price
-        self.__stock_variation: list = []  # Stores the daily stock variations (open, close, high, low)
+        self.__stock_variation: list = []  # Stores the daily stock variations (opened, close, high, low)
         self.__stock_description: str = description
         self.__actives: str = actives
         self.percentage_change = 0.0
         self.current_price: float = self.__stock_price
         self.previous_close: float = self.__stock_price
-        self.time_manager = Time()
+        self.time_manager = time_manager
 
     def get_company_name(self) -> str:
         return self.__company_name
@@ -73,27 +73,27 @@ class Stock(AbstractStock):
         volatility_change = rng.normal(loc=self.__mean, scale=self.__std, size=10)
         prices = [self.previous_close * (1 + change) for change in volatility_change]
         prices.sort()
-        open = random.choice(prices[1:-2])
+        opened = random.choice(prices[1:-2])
         close = random.choice(prices[1:-2])
         high = prices[-1]
         low = prices[0]
         self.current_price = close
         self.previous_close = close
-        self.stock_variation_storer(open, close, high, low)
+        self.stock_variation_storer(opened, close, high, low)
 
         if len(self.__affected_by) > 0:
             for event in self.__affected_by:
                 self.event_affect_stock(event=event)
 
-    def stock_variation_storer(self, open=None, close=None, high=None, low=None) -> None:
+    def stock_variation_storer(self, opened=None, close=None, high=None, low=None) -> None:
         """
-        Stores stock data (open, close, high, low) for the day. Maintains only 30 days of history.
+        Stores stock data (opened, close, high, low) for the day. Maintains only 30 days of history.
         """
         current_date = self.time_manager.get_next_date()
         if len(self.__stock_variation) < 30:
             self.__stock_variation.append({
                 "Date": current_date,
-                "Open": open,
+                "Open": opened,
                 "Close": close,
                 "High": high,
                 "Low": low
@@ -102,7 +102,7 @@ class Stock(AbstractStock):
             self.__stock_variation.pop(0)
             self.__stock_variation.append({
                 "Date": current_date,
-                "Open": open,
+                "Open": opened,
                 "Close": close,
                 "High": high,
                 "Low": low
