@@ -26,9 +26,10 @@ class World:
             self.__player:Player = Player(i_starting_USD=100000)
         else:
             self.__player = player
+            
         self.news = News(self.__events) 
 
-    def load_stocks(self):
+    def load_stocks(self) -> dict:
         stocks = {
             "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.global_time),
             "Edison": Stock(650, "Edison", 0.6, 0.7, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.global_time),
@@ -40,7 +41,7 @@ class World:
         }
         return stocks
 
-    def load_events(self):
+    def load_events(self) -> dict:
         '''
         event_son_first_w = Events("War", "Description", 5, (-5, 5), "Edison", "Electricity")
         events_son_two_w = Events("War", "Description", 5, (-5, 5), "Doors", "Software")
@@ -93,26 +94,29 @@ class World:
         dad_nd = EventsStorer("Natural Disasters", [event_son_nd_1,event_son_nd_2,event_son_nd_3,event_son_nd_4,event_son_nd_5,event_son_nd_6,event_son_nd_7])
         dad_sm = EventsStorer("Social Media", [event_son_sm_1,event_son_sm_2,event_son_sm_3,event_son_sm_4,event_son_sm_5,event_son_sm_6,event_son_sm_7])
 
-        events = {"Random": [{dad_w: 0.40}, {dad_a: 0.80}, {dad_ta: 0.60},{dad_nd: 0.60},{dad_sm: 0.30}]}
+        events = {dad_w: 0.40, dad_a: 0.80, dad_ta: 0.60,dad_nd: 0.60,dad_sm: 0.30}
 
 
         return events
 
+    def verify_all_active(self) -> bool:
+        return all(dad.reach_limit() for dad in self.__events.keys())
+    
+        # for dad in self.__events.keys():
+        #     if dad.reach_limit() != False:
+        #         return False
 
-# ______________________________________________________________________________________________________________________________________
-# ! will be eliminate and add to world
+    def create_event(self) -> NotImplemented:
+        verificator:bool = True
+        events_list:list = ["War", "Technology Advances", "Accident", 
+                            "Seasons", "Natural Disasters", "Social Media"]  
 
-# def create_event()->str:
-#   verificator:bool = True
-#   events_list:list = ["War", "Technology Advances", "Accident", 
-#                     "Seasons", "Natural Disasters", "Social Media"]  
-  
-#   while verificator:
-#     random_event:str = random.choice(events_list)
-#     if events.get(random_event).get_state() == "Inactive":
-#       verificator:bool = False
-#       events.get(random_event).state_activer()
-#       return random_event
+        while verificator:
+            random_event:str = random.choice(events_list)
+            if events.get(random_event).get_state() == "Inactive":
+                verificator:bool = False
+                events.get(random_event).state_activer()
+            return random_event
     
 # ! will be eliminate and add to world
 # def all_events_active():
@@ -120,16 +124,6 @@ class World:
 #     if event.get_state() == "Inactive":
 #       return False
 #   return True
-
-# ! will be eliminate and add to world
-# def desactivate_event()->None:
-#   for event in events.values():
-#     if event.get_state() == "Active":
-#       event.state_desactiver()
-#       event.change_percentage()
-#       event.change_impact()
-
-
 
 
     def run(self):

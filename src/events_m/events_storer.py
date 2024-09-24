@@ -3,12 +3,16 @@ from events_m.events import Events
 
 class EventsStorer:
     def __init__(self, name:str = None, sons_list:list = []):
-        self.__name = name
-        self.__sons_list = sons_list
-        self.__sons_active_list = []
+        self.__name: str = name
+        self.__sons_list: list = sons_list
+        self.__sons_active_list: list = []
+        self.__percentage: dict = {"Doors": 0, "Edison": 0, "Game pause": 0, "ArabOilCompany": 0, "MVidia": 0, "Pear": 0, "USWeapons": 0}
 
     def __repr__(self) -> str:
         return self.__name
+    
+    def __iter__(self):
+        return self.__sons_list
     
     # TODO You should use this in a conditional if you wanna use select_son()
 
@@ -37,6 +41,15 @@ class EventsStorer:
             son.state_desactiver()
         if son[0].get_state() == "Desactive":
             self.__sons_active_list.remove(son)
+    
+    
+    def get_percentage(self):
+           return self.__percentage
+
 
     def get_active_sons(self):
         return self.__sons_active_list
+        
+
+    
+    
