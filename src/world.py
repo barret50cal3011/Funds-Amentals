@@ -13,7 +13,7 @@ class World:
         self.global_time = Time(start_date="2024-01-01")
         
         if events == None:
-            self.__events:dict = events.load_events()
+            self.__events:dict = self.load_events()
         else:
             self.__events = events
 

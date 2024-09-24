@@ -2,11 +2,11 @@
 
 ## Problem
 
-The people don't know how to use a stock market. We discover that the people around us *including us*, this is a little disappointing because the people are losing a great possibility; we are not saying that you will solve are your finance problems investing in the stock market, we want that more people know about this market and discover the possibilities that it offer.
+We discover that the people around us *including us* don't usually know how to use a stock market, this is a little disappointing because the they are losing a great possibility; we are not saying that you will solve are your finance problems investing in the stock market but we want that more people know about the stock market and discover the possibilities that it offer.
 
 ## Solution
 
-To solve this situation, we intend to make a game that simulates stock market behavior For simplicity purposes the game will initially be a text base game, it means that all the operations and interactions that you will have with this *game*, will be by Terminal. We decide to make this like a game because the stock market it's like a game, you have to sort some problems if you want to reach an objective (like winning money), make predictions and decide about how you will react to face the problems for not losing the game (losing all your actives). It will be like a kindergarten for new investors, including some important thing but not having all the thing that happens in a stock market (at the moment).
+To solve this situation, we intend to make a game that simulates a stock market behavior. For simplicity purposes the game will initially be a text base game, which means that all the operations and interactions that you will have with this *game*, will be by Terminal. We decide to make this like a game because games are very good tools to teach different skills. With this game we intend to teach how a stock market changes when different events in the world happen. The player will learn to make predictions and earn money based on this events. It will be like a kindergarten for new investors, including some important thing but not having all the thing that happens in a stock market (at the moment).
 
 ## How we approach the problem
 
@@ -129,7 +129,7 @@ Also, we are planning to add a structure that will store and manage `events` obj
 
 In `World` there is one thing that we are missing and is the player, so, we decide to create a `player` class that will define the portfolio that the player have, this portfolio is compound by `stocks`, it means, here is the place in which the player save and see the stocks that he own. 
 
-### How player will interact with the program?
+### How the player will interact with the program?
 
 For last one, we need something that let the player interact with world and also give him information about what is happening in world, for this last one item we decide create `Controller` and  `View`; `Controler` as his name say, this will let the player interact with world, letting him control some process like watching his portfolio or selling stocks, it is compound by `Wolrd`, being a bridge between `World` and `View`. `View` is the part that the player see, is like the fronted of the code that will interact will the player, it is compound by `Controler`
 
@@ -250,9 +250,28 @@ classDiagram
 
 ```
 
-## Download and usage
+### Download and usage
 
-This will be add in the future, when the project is done
+
+## Running Virtual Enviroment
+
+Before running the enviroment, if you are running in WindowsOS you need to have Execute policy to unrestricted. You can do this by executing the command ```Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser ``` in a CMD.
+
+To create a virtual enviroment we used virtualenv and used the following [tutorial](https://www.youtube.com/watch?v=TNtrAvNNxTY) to created. To open the enviroment, you need to execute ```.\env\Scripts\activate``` on a terminal inside Funds-Amentals directory. Inside the enviroment there are all the needed pip moduels to execute the game.
+
+Once the virtual enviroment is running, you will need to run the index.py file using a python 3 version.
+
+## Basic Commands
+
+```
+help [name of a command]
+read_news
+buy_stock <name of the company> <amount of stocks>
+sell_stock <name of the company> <amount of stocks>
+see_portfolio
+next_week
+exit
+```
 
 
 ## Suggestions
