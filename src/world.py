@@ -26,9 +26,10 @@ class World:
             self.__player:Player = Player(i_starting_USD=100000)
         else:
             self.__player = player
+            
         self.news = News(self.__events) 
 
-    def load_stocks(self):
+    def load_stocks(self) -> dict:
         stocks = {
             "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.global_time),
             "Edison": Stock(650, "Edison", 0.6, 0.7, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.global_time),
@@ -40,7 +41,7 @@ class World:
         }
         return stocks
 
-    def load_events(self):
+    def load_events(self) -> dict:
         '''
         event_son_first_w = Events("War", "Description", 5, (-5, 5), "Edison", "Electricity")
         events_son_two_w = Events("War", "Description", 5, (-5, 5), "Doors", "Software")
@@ -93,63 +94,89 @@ class World:
         dad_nd = EventsStorer("Natural Disasters", [event_son_nd_1,event_son_nd_2,event_son_nd_3,event_son_nd_4,event_son_nd_5,event_son_nd_6,event_son_nd_7])
         dad_sm = EventsStorer("Social Media", [event_son_sm_1,event_son_sm_2,event_son_sm_3,event_son_sm_4,event_son_sm_5,event_son_sm_6,event_son_sm_7])
 
-        events = {"Random": [{dad_w: 0.40}, {dad_a: 0.80}, {dad_ta: 0.60},{dad_nd: 0.60},{dad_sm: 0.30}]}
+        events = {dad_w: 0.05, dad_a: 0.25, dad_ta: 0.10,dad_nd: 0.30,dad_sm: 0.30}
 
 
         return events
 
 
-# ______________________________________________________________________________________________________________________________________
-# ! will be eliminate and add to world
-
-# def create_event()->str:
-#   verificator:bool = True
-#   events_list:list = ["War", "Technology Advances", "Accident", 
-#                     "Seasons", "Natural Disasters", "Social Media"]  
-  
-#   while verificator:
-#     random_event:str = random.choice(events_list)
-#     if events.get(random_event).get_state() == "Inactive":
-#       verificator:bool = False
-#       events.get(random_event).state_activer()
-#       return random_event
+    def get_not_reach_limit_storer(self) -> dict:
+        return {k: v for k, v in self.__events.items() if not k.reach_limit()}
     
-# ! will be eliminate and add to world
-# def all_events_active():
-#   for event in events.values():
-#     if event.get_state() == "Inactive":
-#       return False
-#   return True
+    def active_events_sons(self) -> list:
+        return [k for k in self.__events.keys() if k.get_active_sons() != []]
 
-# ! will be eliminate and add to world
-# def desactivate_event()->None:
-#   for event in events.values():
-#     if event.get_state() == "Active":
-#       event.state_desactiver()
-#       event.change_percentage()
-#       event.change_impact()
+    def verify_all_active(self) -> bool:
+        filtred_events_not_reach_limit: dict = self.get_not_reach_limit_storer()
+        return filtred_events_not_reach_limit == {}
+    
+    def posibility_active_event(self) -> bool:
+        bools_list: list = [True, False]
+        bool_weight: list = [0.4, 0.6]
+        selected_bool: bool = random.choices(population = bools_list, weights = bool_weight, k=1)
+        return selected_bool[0]
+    
+
+    def create_event(self) -> None:
+
+        if self.verify_all_active() == False:
+            filtred_events_not_reach_limit: dict = self.get_not_reach_limit_storer()
+
+            father_events: list = list(filtred_events_not_reach_limit.keys())
+            weight: list = list(filtred_events_not_reach_limit.values())
+
+            selected_father_event: EventsStorer = random.choices(population = father_events, weights = weight, k=1)
+                
+            selected_father_event.active_sons()
 
 
+
+    def calculate_percentage(self) -> dict:
+        fathers_with_active_sons: list = self.active_events_sons()
+        
+        if fathers_with_active_sons != []:   
+            percentage_event: dict = {}
+
+            for father_event in fathers_with_active_sons:
+                active_sons: list = father_event.get_active_sons()
+
+                for active_event in active_sons:
+                    affected_stock: str = active_event.get_affected_stock()
+
+                    if affected_stock not in percentage_event:
+                        percentage_event[affected_stock] = 0
+
+                    percentage_active_event: float = active_event.get_percentage()
+                    percentage_event[affected_stock] += percentage_active_event
+
+            return percentage_event
+        
+
+    def pass_percentage_to_stocks(self) -> None:
+        percentage: dict = self.calculate_percentage()
+        stocks_dict: dict = self.__stocks
+
+        for stock in stocks_dict:
+            if stock in percentage:
+                percentage_of_stock: float = percentage[stock]
+                stock_will_be_affeccted: Stock = stocks_dict.get(stock)
+                stock_will_be_affeccted.update_stock_price(percentage=percentage_of_stock)
+            else:
+                raise ValueError("Something happen when passing percentage to stocks")
+
+
+    def desactive_event(self) -> None:
+        fathers_with_active_sons: list = self.active_events_sons()
+        if fathers_with_active_sons != []:
+            for storer in fathers_with_active_sons:
+                storer.desactive_sons()
+            self.pass_percentage_to_stocks()
 
 
     def run(self):
         timer = 0
-        while timer < 20:
-            random_event_name = create_event()
-            random_event = self.__events.get(random_event_name)
-            
-            if not all_events_active():
-                if random_event.get_state() == "Active":
-                    random_event.set_percentage(random.uniform(-5, 5))
-                    random_event.affect_stocks(self.stocks)
-
-            print(f"{random_event_name} is {random_event.get_state()}",
-                  f"\nDescription: {random_event.get_description()}",
-                  f"\nImpact: {random_event.get_percentage()}%",
-                  "\n")
-
-            for stock in self.stocks:
-                print(f"{stock.company_name} stock price: {stock.get_stock_price()}")
+        while timer < 10:
+            self.create_event()
 
             timer += 1 
         
@@ -192,15 +219,7 @@ class World:
 
 
     def next_week(self):
-        random_event_name = create_event()
-        random_event = self.__events.get(random_event_name)
-        
-
-        if random_event.get_state() == "Active":
-            random_event.set_percentage(random.uniform(-5, 5))
-            random_event.affect_stocks(self.__stocks)
-        
-        self.__current_event = random_event
+        self.create_event()
 
 
     def see_portfolio(self):

@@ -5,11 +5,12 @@ class Events:
 
     self.__event_name:str = event_name
 
-    self.__stock_actives:str = affected_stock
+    self.__stock_actives:str = actives
 
-    self.__stock_name:str = actives
+    self.__stock_name:str = affected_stock
     
-    self.__description:str = i_description.format(self.__stock_name, self.__stock_actives)
+    self.__description:str = i_description
+    # self.__description:str = i_description.format(self.__stock_name, self.__stock_actives)
 
     self.__impact:str = "Stable"
 
@@ -25,9 +26,6 @@ class Events:
     
     # Range that will have the the variation of percent on of each event
     self.__event_percentage_range:tuple = event_percentage_range
-
-    self.affected_stock:str = affected_stock
-
     
     # self.__stocks_company:dict = {"ArabOilCompany": "Oil", "Doors": "Software", "Edison": "Electricity", 
     #                               "GamePause": "VideoGames", "mvidia": "PC Components", 
@@ -58,6 +56,9 @@ class Events:
   def get_event_duration(self) -> float:
     return self.__event_duration
   
+  def get_affected_stock(self):
+    return self.__stock_name
+  
   # ! Posible elimination 
   # def get_event_percentage_range(self):
   #   return self.__event_percentage_range
@@ -69,9 +70,8 @@ class Events:
     self.__impact = impact
 
 
-  # ! Posible elimination 
-  # def set_percentage(self, percentage:float):
-  #   self.__percentage = percentage
+  def set_percentage(self, percentage:float):
+    self.__percentage = percentage
   
 
 
@@ -82,7 +82,7 @@ class Events:
       # for using it to decide the percentage value
       starts:int = self.__event_percentage_range[0]
       ends:int = self.__event_percentage_range[1]
-      percentage = ((random.uniform(starts, ends))/100)
+      percentage = (random.uniform(starts, ends))
       self.set_percentage(percentage=percentage)
 
   # Depending of the percentage's value, it has 3 options

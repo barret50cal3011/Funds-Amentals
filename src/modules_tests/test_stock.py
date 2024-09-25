@@ -26,7 +26,7 @@ print(f"Stock Variation Data: {edison_stock.get_stock_variation()}")
 # Plot the candlestick chart
 edison_stock.candlestick()
 
-doors_stocks=Stock(300, "Doors", 0.5, 0.5, "Description", "Software",timer)
+doors_stocks=Stock(300, "Doors", 0.015342893811784124, -0.00037632775223384106, "Description", "Software",timer)
 print(edison_stock.time_manager.get_date())
 edison_stock.time_manager.get_next_date()
 print(edison_stock.time_manager.get_date())
