@@ -177,7 +177,7 @@ class World:
             else:
                 print(f"No articles available for the event: {event_name}")
         else:
-            print("No specific event provided to display the article.")
+            self.show_news()
 
 
 
