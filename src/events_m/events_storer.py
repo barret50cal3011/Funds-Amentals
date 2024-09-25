@@ -60,16 +60,6 @@ class EventsStorer:
         return active_event
 
 
-    # Todo Implementation with for
-
-    def desactive_sons(self):
-        for son in self.__sons_active_list:
-            son.state_desactiver()
-            if son.get_state() == "Desactive":
-                self.__sons_active_list.remove(son)
-                self.__sons_list.append(son)
-
-
     # Implementation with list index and some logic (first enters first ends)
 
     def active_sons(self) -> None:
@@ -86,7 +76,7 @@ class EventsStorer:
 
         for son in self.__sons_active_list:
             son.state_desactiver()
-            if son.get_state() == "Desactive":
+            if son.get_state() == "Inactive":
                 self.__sons_active_list.remove(son)
                 self.__sons_list.append(son)
 
