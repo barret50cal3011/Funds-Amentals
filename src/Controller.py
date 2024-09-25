@@ -2,11 +2,21 @@ import textwrap
 from world import World
 
 class Controller:
-
+    """
+    The Controller class acts as an intermediary between the View and the World.
+    It evaluates user commands and invokes corresponding methods on the World instance.
+    """
     def __init__(self):
         self.__world = World()
 
     def eval_command(self, command):
+        """
+        Evaluates the given command and calls the appropriate method on the World instance.
+        
+        :param command: A string containing the user command to evaluate.
+        :return: The result of the executed command, if applicable.
+        :raises Exception: If the command is improperly formatted or has missing parameters.
+        """
         command_split = command.split(" ")
         if command_split[0] == "read_news":
             if(len(command_split) == 1):
