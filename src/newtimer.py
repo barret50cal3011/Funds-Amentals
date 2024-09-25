@@ -12,4 +12,8 @@ class Time:
         self.__current_date += timedelta(days=1)
         return date_str
     def get_date(self):
+        """
+        The `get_date` function returns the current date stored in the `__current_date` attribute.
+        :return: The method `get_date` is returning the value of the private attribute `__current_date`.
+        """
         return self.__current_date

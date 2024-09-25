@@ -235,8 +235,9 @@ class World:
     def see_market(self):
         stock_prices = {}
         for stock in self.__stocks:
-            stock_prices[stock] = self.__stocks[stock].get_stock_price()
-        return self.__stocks
+            price = self.__stocks[stock].get_stock_price()
+            stock_prices[stock] = price
+        return stock_prices
     
 if __name__ == '__main__':
     world = World()

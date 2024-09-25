@@ -101,6 +101,6 @@ class View:
 
 
     def run(self):
-        print("Welcome to the stock market game.\n Type help for a list of commands.\n")
+        print("Welcome to the stock market game.\nType help for a list of commands.\n")
         while(self.read() != -1):
             pass

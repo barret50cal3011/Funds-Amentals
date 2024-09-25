@@ -8,7 +8,7 @@ edison_stock = Stock(stock_price=100.0, company_name="Edison", std=0.02, mean=0.
 # Display initial stock information
 print(f"Initial Stock Price for {edison_stock.get_company_name()}: ${edison_stock.get_stock_price()}")
 
-# Update the stock price with a 5% change
+# Update the stock price with a 5% change1
 edison_stock.update_stock_price(5.0)
 
 # Display the new stock price after the update

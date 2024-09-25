@@ -41,4 +41,7 @@ class Controller:
             return portfolio
         elif command_split[0] == "see_market":
             market = self.__world.see_market()
-            return market
+            market_str = "Current market status:\n"
+            for stock in market:
+                market_str += f"{stock} : {market[stock]}\n"
+            return market_str
