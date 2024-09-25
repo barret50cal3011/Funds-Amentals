@@ -16,6 +16,7 @@ class View:
         sell_stock <name of the company> <amount of stocks>
         see_portfolio
         next_week
+        see_market
         exit
         """
     )
@@ -57,8 +58,9 @@ class View:
         """,
         "see_market":
         """
-        see_market
+        see_market [stock name]
         Shows the market and the prices of the stocks.
+        If a name is given, it shows the candle stick of the stock.
         """
         ,
         "exit": 
