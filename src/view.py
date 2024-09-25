@@ -1,6 +1,7 @@
 import os
 import sys
 import textwrap
+import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from Controller import Controller
@@ -113,6 +114,7 @@ class View:
                 #TODO
         elif command == "exit":
             print("Thanks for playing")
+            time.sleep(5)
             return -1
         else:
             try: 
