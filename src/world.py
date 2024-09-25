@@ -127,7 +127,7 @@ class World:
             father_events: list = list(filtred_events_not_reach_limit.keys())
             weight: list = list(filtred_events_not_reach_limit.values())
 
-            selected_father_event: EventsStorer = random.choices(population = father_events, weights = weight, k=1)
+            selected_father_event: EventsStorer = random.choices(population = father_events, weights = weight, k=1)[0]
                 
             selected_father_event.active_sons()
 
@@ -157,14 +157,11 @@ class World:
     def pass_percentage_to_stocks(self) -> None:
         percentage: dict = self.calculate_percentage()
         stocks_dict: dict = self.__stocks
-
         for stock in stocks_dict:
             if stock in percentage:
                 percentage_of_stock: float = percentage[stock]
                 stock_will_be_affeccted: Stock = stocks_dict.get(stock)
                 stock_will_be_affeccted.update_stock_price(percentage=percentage_of_stock)
-            else:
-                raise ValueError("Something happen when passing percentage to stocks")
 
 
     def desactive_event(self) -> None:
@@ -175,12 +172,20 @@ class World:
             self.pass_percentage_to_stocks()
 
 
+
+
     def run(self):
         timer = 0
-        while timer < 10:
-            self.create_event()
+        while timer < 7:
+            self.next_week()
+            # hi = input("y or n")
+            # if hi == "y":
+            #     pass
             timer += 1 
-        
+
+
+
+
     def show_news(self):
         print("Generating news headlines...")
         headlines = self.news.get_news_titles()
@@ -220,8 +225,9 @@ class World:
 
 
     def next_week(self):
+        self.global_time.get_next_date()
+        self.desactive_event()
         self.create_event()
-
 
     def see_portfolio(self):
         return self.__player.get_portfolio()

@@ -82,7 +82,7 @@ class Events:
       # for using it to decide the percentage value
       starts:int = self.__event_percentage_range[0]
       ends:int = self.__event_percentage_range[1]
-      percentage = (random.uniform(starts, ends))
+      percentage = round((random.uniform(starts, ends)), ndigits=2)
       self.set_percentage(percentage=percentage)
 
   # Depending of the percentage's value, it has 3 options
