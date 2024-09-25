@@ -168,27 +168,7 @@ After the previous explanation about how we decide to create and generate the da
 <details><summary>World</summary>
 <p>
 
-This is the place were `stocks` and `events` use to act, so this will be compound by `events` and `stocks`, also, this will have to some functions and methods that regulate the behavior of `events` and `stocks` and how they will interact, one of these functions has to create the objects `events` and `stocks` for starting the games, so, we decide save the information that this objects need in a JSON, and import this data to `world`.
-
-</p>
-</details>
-
-### News
-
-<details><summary>News</summary>
-<p>
-
-Also, we are planning to add a structure that will store and manage `events` objects for making it easier to world, so, we create a new class called `events_storer` that will make this work, taking of functions to world, making it easier to modify and update.
-
-</p>
-</details>
-
-### Time
-
-<details><summary>New Timer</summary>
-<p>
-
-Also, we are planning to add a structure that will store and manage `events` objects for making it easier to world, so, we create a new class called `events_storer` that will make this work, taking of functions to world, making it easier to modify and update.
+This is the place where stocks and events use to act, so this will be compounded by events, events_storer, stocks, time and news also, this will have to some functions and methods that regulate the behavior of events and stocks and how they will interact. One of these functions has to create the objects events and stocks for starting the games. We decided to create a time for each stock to process the individual data and not generate some errors when running the program.
 
 </p>
 </details>
@@ -223,6 +203,28 @@ This gets the string from View, this will compare the string with some condition
 </p>
 </details>
 
+### Time
+
+<details><summary>New Timer</summary>
+<p>
+
+This class was created to admin the time of the program, of course, but has another function that is used to view the date of each candle in the candlestick, this method was integrated into stocks.
+
+</p>
+</details>
+
+Finally, there is another important class that shows the events that are affecting stocks around the world.
+
+### News
+
+<details><summary>News</summary>
+<p>
+
+How we explained it before: that class is responsible for showing what is happening in the world. This class shows the headlines of all available news based on current events (news titles) in a list, and have another method to show the description or better said article for a particular event.
+
+
+</p>
+</details>
 
 
 ## Class diagram
