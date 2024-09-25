@@ -276,19 +276,18 @@ class World:
         """
         if event_name:
             article = self.news.get_news_article(event_name)
-            event = self.__events.get(event_name)
-            if event:
-                affected_stock = event.affected_stock
-            else:
-                affected_stock = "No specific stock affected."
-                
+            affected_stock = None
+            for storer in self.__events.keys():
+                for event in storer.get_active_sons():
+                    if event.get_event_name() == event_name:
+                        affected_stock = event.get_affected_stock()
+
             if article:
                 print(f"Article for {event_name}:\n{article}\nAffected Stock: {affected_stock}")
             else:
                 print(f"No articles available for the event: {event_name}")
         else:
             self.show_news()
-
 
 
     def buy_stock(self, stock_name, amount):
