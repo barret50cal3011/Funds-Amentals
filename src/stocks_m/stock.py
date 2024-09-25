@@ -93,7 +93,7 @@ class Stock(AbstractStock):
             })
 
     def candlestick(self):
-        """ Plots a candlestick chart of the stock's recent performance. """
+        """Plots a candlestick chart of the stock's recent performance. """
         if len(self.__stock_variation) > 0:
             df = pd.DataFrame(self.__stock_variation)
             df.index = pd.to_datetime(df['Date'])
