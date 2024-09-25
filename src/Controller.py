@@ -39,3 +39,6 @@ class Controller:
         elif command_split[0] == "see_portfolio":
             portfolio = self.__world.see_portfolio()
             return portfolio
+        elif command_split[0] == "see_market":
+            market = self.__world.see_market()
+            return market
