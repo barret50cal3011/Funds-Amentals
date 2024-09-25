@@ -10,7 +10,13 @@ from news import News
 class World:
 
     def __init__(self, events:Optional[dict] = None, stocks:Optional[dict] = None, player:Optional[Player] = None):
-        self.global_time = Time(start_date="2024-01-01")
+        self.time_doors = Time(start_date="2024-01-01")
+        self.time_edison = Time(start_date="2024-01-01")
+        self.time_game_pause = Time(start_date="2024-01-01")
+        self.time_araboilcompany = Time(start_date="2024-01-01")
+        self.time_mvidia = Time(start_date="2024-01-01")
+        self.time_pear = Time(start_date="2024-01-01")
+        self.time_usweapons = Time(start_date="2024-01-01")
         
         if events == None:
             self.__events:dict = self.load_events()
@@ -27,17 +33,21 @@ class World:
         else:
             self.__player = player
             
-        self.news = News(self.__events) 
+        self.news = News(self.__events)
+        
+        for stock in self.__stocks:
+            for i in range(15):
+                self.__stocks[stock].stock_price_variation() 
 
     def load_stocks(self) -> dict:
         stocks = {
-            "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.global_time),
-            "Edison": Stock(650, "Edison", 0.6, 0.7, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.global_time),
-            "Game pause": Stock(200, "Game pause", 0.7, 0.6, "Retail and gaming company, sells video games and gaming consoles.", "Retail", self.global_time),
-            "ArabOilCompany": Stock(850, "ArabOilCompany", 0.4, 0.5, "Oil company, sells crude oil and petroleum products.", "Oil", self.global_time),
-            "MVidia": Stock(500, "MVidia", 0.5, 0.5, "Semiconductor and GPU technology company, sells graphic processing units and AI chips.", "Technology", self.global_time),
-            "Pear": Stock(700, "Pear", 0.4, 0.5, "Consumer electronics company, sells smartphones, tablets, and computers.", "Technology", self.global_time),
-            "USWeapons": Stock(900, "USWeapons", 0.3, 0.6, "Defense and aerospace company, sells weapons systems and military aircraft.", "Defense", self.global_time)
+            "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.time_doors),
+            "Edison": Stock(650, "Edison", 0.6, 0.7, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.time_edison),
+            "Game pause": Stock(200, "Game pause", 0.7, 0.6, "Retail and gaming company, sells video games and gaming consoles.", "Retail", self.time_game_pause),
+            "ArabOilCompany": Stock(850, "ArabOilCompany", 0.4, 0.5, "Oil company, sells crude oil and petroleum products.", "Oil", self.time_araboilcompany),
+            "MVidia": Stock(500, "MVidia", 0.5, 0.5, "Semiconductor and GPU technology company, sells graphic processing units and AI chips.", "Technology", self.time_mvidia),
+            "Pear": Stock(700, "Pear", 0.4, 0.5, "Consumer electronics company, sells smartphones, tablets, and computers.", "Technology", self.time_pear),
+            "USWeapons": Stock(900, "USWeapons", 0.3, 0.6, "Defense and aerospace company, sells weapons systems and military aircraft.", "Defense", self.time_usweapons)
         }
         return stocks
 
@@ -174,6 +184,7 @@ class World:
 
 
     def run(self):
+        
         timer = 0
         while timer < 10:
             self.create_event()
@@ -218,6 +229,11 @@ class World:
 
 
     def next_week(self):
+        for stock in self.__stocks:
+            for i in range(7):
+                self.__stocks[stock].stock_price_variation()
+        self.global_time.get_next_date()
+        self.desactive_event()
         self.create_event()
 
 
