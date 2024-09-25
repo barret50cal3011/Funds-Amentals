@@ -7,6 +7,11 @@ from Controller import Controller
 
 
 class View:
+    """
+    The View class handles user interaction and command processing for the stock market game.
+    It displays available commands and their descriptions, accepts user input, 
+    and communicates with the Controller to execute commands.
+    """
 
     hlp = textwrap.dedent(
         """
@@ -77,6 +82,13 @@ class View:
 
 
     def read(self):
+        """
+        Reads a command from the user input and processes it.
+        Validates the command and executes it via the Controller. 
+        Displays appropriate feedback or error messages based on the command outcome.
+        
+        :return: -1 if the exit command is issued, otherwise None.
+        """
         command = input()
         if not command.split(" ")[0] in self.COMMANDS:
             print("Command not recognized.")
@@ -103,6 +115,10 @@ class View:
 
 
     def run(self):
+        """
+        Runs the main loop of the game, prompting the user for commands until they decide to exit.
+        Displays a welcome message and instructions for using the commands.
+        """
         print("Welcome to the stock market game.\nType help for a list of commands.\n")
         while(self.read() != -1):
             pass

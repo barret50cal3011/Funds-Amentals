@@ -159,6 +159,11 @@ class World:
     
 
     def create_event(self) -> None:
+        """
+        This function creates a new event if not all events have reached their limit.
+        It selects a random parent event from those that have not reached their limit
+        and activates its active sons (child events).
+        """
 
         if self.verify_all_active() == False:
             filtred_events_not_reach_limit: dict = self.get_not_reach_limit_storer()
@@ -173,6 +178,14 @@ class World:
 
 
     def calculate_percentage(self) -> dict:
+        """
+        This function calculates the total percentage impact of active son events 
+        on their respective stocks. It aggregates the percentages of each active son 
+        event associated with each stock.
+
+        :return: A dictionary where the keys are stock names and the values are the 
+                total percentage impacts from the active son events.
+        """
         fathers_with_active_sons: list = self.active_events_sons()
         
         if fathers_with_active_sons != []:   
@@ -194,6 +207,11 @@ class World:
         
 
     def pass_percentage_to_stocks(self) -> None:
+        """
+        This function updates the stock prices based on the calculated percentage impacts 
+        from active events. It retrieves the percentage impacts and applies them to each 
+        corresponding stock's price.
+        """
         percentage: dict = self.calculate_percentage()
         stocks_dict: dict = self.__stocks
         for stock in stocks_dict:
@@ -204,6 +222,11 @@ class World:
 
 
     def desactive_event(self) -> None:
+        """
+        This function deactivates all active son events of parent events that have active sons.
+        After deactivating these events, it updates the stock prices based on the impacts 
+        calculated from the deactivated events.
+        """
         fathers_with_active_sons: list = self.active_events_sons()
         if fathers_with_active_sons != []:
             for storer in fathers_with_active_sons:
