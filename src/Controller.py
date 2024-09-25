@@ -40,8 +40,11 @@ class Controller:
             portfolio = self.__world.see_portfolio()
             return portfolio
         elif command_split[0] == "see_market":
-            market = self.__world.see_market()
-            market_str = "Current market status:\n"
-            for stock in market:
-                market_str += f"{stock} : {market[stock]}\n"
-            return market_str
+            if len(command_split) == 1:
+                market = self.__world.see_market()
+                market_str = "Current market status:\n"
+                for stock in market:
+                    market_str += f"{stock} : {market[stock]}\n"
+                return market_str
+            elif len(command_split) == 2:
+                return self.__world.candle_stick(command_split[1])
