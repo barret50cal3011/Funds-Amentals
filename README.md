@@ -20,7 +20,7 @@ Since the problem is a lack of knowledge on how stock markets work and games hav
 
 Stock market events are spontaneous occurrences that can significantly influence the prices of stocks globally. These events include a variety of factors such as economic indicators, geopolitical developments, technological advancements, natural disasters, regulatory changes, and shifts in market sentiment. Due to their unpredictable nature, these events can cause daily fluctuations in stock prices. To effectively capitalize on these fluctuations, investors must stay informed and analyze these events to identify potential opportunities for profit. Investing in response to such events can often be more profitable than traditional saving methods, as it allows investors to leverage market dynamics and make strategic decisions based on the latest information. 
 
-In managing such events programmatically, a Python class like Events can help simulate their impact on stock prices. This class tracks various attributes of an event, including its name, description, impact, and duration. It also manages the event's state (active or inactive) and adjusts the stock's price impact based on random percentage changes. Functions like create_event(), all_events_active(), and deactivate_event() facilitate the creation, monitoring, and deactivation of events, respectively. These tools are essential for understanding and responding to the dynamic nature of financial markets, making investing a more informed and strategic endeavor.
+In managing such events programmatically, a Python class like Events can help simulate their impact on stock prices. This class tracks various attributes of an event, including its name, description, impact, and duration. It also manages the event's state (active or inactive) and adjusts the stock's price impact based on random percentage changes. Functions like create_event(), and deactivate_event() facilitate the creation, monitoring, and deactivation of events, respectively. These tools are essential for understanding and responding to the dynamic nature of financial markets, making investing a more informed and strategic endeavor.
 </p>
 </details> 
 
@@ -30,7 +30,7 @@ In managing such events programmatically, a Python class like Events can help si
 <details><summary>Events Storer</summary>
 <p>
 
-Also, we are planning to add a structure that will store and manage `events` objects for making it easier to world, so, we create a new class called `events_storer` that will make this work, taking of functions to world, making it easier to modify and update.
+This object is used to save all events of the same type, for example, an event storer ´War´ have all the events of type War that affect each stock. We also discussed in this class the managing of each event, activating, deactivating and other methods that we could make to an event.
 
 </p>
 </details>
@@ -156,6 +156,10 @@ stock_price =(round(stock_price, 2)) # And change this will be stored in stock_v
 
 ```
 
+
+### Use
+After the previous explanation about how we decide to create and generate the data for stocks, we are going to talk about the class stock. In this class, we create objects of type ´Stock´ that start with some init values. In this class, we can generate stock variation with the previous steps, and we could save this variation. We could apply a tendency (percentage) to the variation and also generate a graphic.
+
 </p>
 </details>
 
@@ -169,26 +173,33 @@ This is the place were `stocks` and `events` use to act, so this will be compoun
 </p>
 </details>
 
+### News
+
+<details><summary>News</summary>
+<p>
+
+Also, we are planning to add a structure that will store and manage `events` objects for making it easier to world, so, we create a new class called `events_storer` that will make this work, taking of functions to world, making it easier to modify and update.
+
+</p>
+</details>
+
+### Time
+
+<details><summary>New Timer</summary>
+<p>
+
+Also, we are planning to add a structure that will store and manage `events` objects for making it easier to world, so, we create a new class called `events_storer` that will make this work, taking of functions to world, making it easier to modify and update.
+
+</p>
+</details>
+
 
 ### Player
 <details><summary>Player</summary>
 <p>
 
-In `World` there is one thing that we are missing and is the player, so, we decide to create a `player` class that will define the portfolio that the player have, this portfolio is compound by `stocks`, it means, here is the place in which the player save and see the stocks that he own. 
-
-
-### How the player will interact with the program?
-
-For last one, we need something that let the player interact with world and also give him information about what is happening in world, for this last one item we decide create `Controller` and  `View`; `Controler` as his name say, this will let the player interact with world, letting him control some process like watching his portfolio or selling stocks, it is compound by `Wolrd`, being a bridge between `World` and `View`. `View` is the part that the player see, is like the fronted of the code that will interact will the player, it is compound by `Controler`
-
-</p>
-</details>
-
-### Controler
-
-<details><summary>Controler</summary>
-<p>
-
+This class has the proposite of having all the comands that will let the player interactue with the project, like, sell_stocks, buy_stocks, get_portfolio, get_balance.
+In it we realice some process to save the data that will be show when the player make get portfolio or get balance. This data will be update when the player make buy stocks and sell stocks.
 
 </p>
 </details>
@@ -198,10 +209,20 @@ For last one, we need something that let the player interact with world and also
 
 <details><summary>View</summary>
 <p>
-
-
+It is compounded by an instance of Controller, and we initialize it at the start of the program.
+This class gets all the player inputs, which means that it gets a string, and depending on whether the string is defined and exists in a list of commands that the player could check, it executes a process that passes their string to Controller. If the command doesn't exist, this will output a message saying that the command doesn't exist.
 </p>
 </details>
+
+### Controller
+
+<details><summary>Controler</summary>
+<p>
+It is compounded by an instance of World, and we initialize it at the start of the program.
+This gets the string from View, this will compare the string with some conditional, and if it gets True, it will execute a method from World in his instance.
+</p>
+</details>
+
 
 
 ## Class diagram
