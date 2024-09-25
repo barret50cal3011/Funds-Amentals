@@ -122,6 +122,8 @@ class Player:
 
         self.save_player_money_invested_in_stock(stock=stock, quantity=quantity)
 
+        print(f"You have bought {quantity} stocks of {stock.get_company_name()}")
+
 
 
     @validate_input_quantity
@@ -148,6 +150,8 @@ class Player:
 
             if self.__player_portfolio[stock] == 0:
                 del self.__player_portfolio[stock]
+            
+            print(f"You have sell {quantity} stocks of {stock.get_company_name()}")
         else: 
             raise ValueError("Not enough stock to sell")
 

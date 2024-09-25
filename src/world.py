@@ -330,7 +330,15 @@ class World:
         
         :return: A dictionary representing the player's portfolio with stock holdings.
         """
-        return self.__player.get_portfolio()
+        return self.__player
+
+    def see_balance(self):
+        """
+        This function returns the player's stock portfolio.
+        
+        :return: A dictionary representing the player's portfolio with stock holdings.
+        """
+        return self.__player.print_player_balance()
 
     def see_market(self):
         """

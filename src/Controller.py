@@ -58,3 +58,7 @@ class Controller:
                 return market_str
             elif len(command_split) == 2:
                 return self.__world.candle_stick(command_split[1])
+            
+        elif command_split[0] == "see_balance":
+            return self.__world.see_balance()
+            

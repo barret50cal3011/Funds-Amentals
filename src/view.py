@@ -22,6 +22,7 @@ class View:
         see_portfolio
         next_week
         see_market
+        see_balance
         exit
         """
     )
@@ -68,6 +69,12 @@ class View:
         If a name is given, it shows the candle stick of the stock.
         """
         ,
+        "see_balance":
+        """
+        see_balance 
+        Shows the player balance (if win or loss money) for all stocks he has bought.
+        """
+        ,
         "exit": 
         """
         exit
@@ -91,7 +98,7 @@ class View:
         """
         command = input()
         if not command.split(" ")[0] in self.COMMANDS:
-            print("Command not recognized.")
+            print("Command not recognized.\nUse help to see the commands\n")
         elif command.split(" ")[0] == "help":
             if len(command.split(" ")) == 1:
                 print(self.hlp)
