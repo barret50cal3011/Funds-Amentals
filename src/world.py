@@ -1,11 +1,13 @@
 import random
 from typing import Optional
-from events_m.events import Events
-from stocks_m.stock import Stock
-from Player import Player
-from events_m.events_storer import EventsStorer
-from newtimer import Time
-from news import News
+from src.events_m.events import Events
+from src.stocks_m.stock import Stock
+from src.Player import Player
+from src.events_m.events_storer import EventsStorer
+from src.newtimer import Time
+from src.news import News
+
+import pdb
 
 class World:
 
@@ -176,8 +178,7 @@ class World:
     def run(self):
         timer = 0
         while timer < 10:
-            self.create_event()
-
+            pdb.set_trace()
             timer += 1 
         
     def show_news(self):
@@ -227,8 +228,5 @@ class World:
 
 
 if __name__ == '__main__':
-    stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
-    player = Player(i_starting_USD=1000.0)
-    events=None
-    world = World(events, stocks_list, player)
+    world = World()
     world.run()

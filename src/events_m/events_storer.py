@@ -1,5 +1,5 @@
 import random
-from events_m.events import Events
+from src.events_m.events import Events
 
 class EventsStorer:
     def __init__(self, name:str = None, sons_list:list = []):

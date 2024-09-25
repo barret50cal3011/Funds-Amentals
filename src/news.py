@@ -1,6 +1,6 @@
 import random
 from typing import Optional, List, Dict
-from events_m.events_storer import EventsStorer
+from src.events_m.events_storer import EventsStorer
 
 class News:
     def __init__(self, event_storers: Dict[str, EventsStorer]):
