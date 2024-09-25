@@ -231,6 +231,12 @@ class World:
             stock_prices[stock] = price
         return stock_prices
     
+
+    def candle_stick(self, stock_name):
+        stock = self.__stocks[stock_name]
+        stock.candlestick() 
+
+ 
 if __name__ == '__main__':
     stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
     player = Player(i_starting_USD=1000.0)
