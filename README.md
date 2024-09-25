@@ -32,12 +32,19 @@ classDiagram
     class AbstractStock {
         -stock_price: float
         -company_name: str
-        -affected_by: list
+        -std: float
+        -mean: float
+        -stock_variation: list
+        -stock_description: str
+        -actives: str
+        +get_company_name()
         +get_stock_price() 
-        +set_stock_price(stock_price: float) 
-        +get_affected_by() 
-        +add_affected_by(event_name: str) 
-        +delete_affected_by(event_name: str) 
+        +set_stock_price(stock_price: float)
+        +get_stock_variation()
+        +get_volatility()
+        +get_stock_description()
+        +get_company_active()
+        +stock_price_variation()
     }
 
     class Stock {
@@ -45,18 +52,29 @@ classDiagram
         -company_name: str
         -std: float
         -mean: float
-        -affected_by: list
         -stock_variation: list
-        +get_company_name() 
+        -stock_description: str
+        -actives: str
+        +percentage_change: float
+        +current_price: float
+        +previous_close: float
+        +time_manager: Time
+        +get_company_name: str
         +get_stock_price() 
-        +get_stock_variation() 
-        +get_affected_by() 
-        +set_stock_price(stock_price: float) 
-        +add_affected_by(event_name: str) 
-        +delete_affected_by(event_name: str) 
-        +stock_variation_changer() 
-        +event_affect_stock() 
-        +stock_price_variation() 
+        +set_stock_price(stock_price: float)
+        +get_stock_variation()
+        +get_volatility()
+        +get_stock_description()
+        +get_company_active()
+        +stock_price_variation()
+        +event_affect_stock(event: Events)
+        +stock_variation_storer(opened: float,close: float,high: float,low: float)
+        +candlestick()
+        +update_stock_price(percentage: float)
+        +get_previous_close()
+        +get_percentage()
+        +generate_initial_stock_data(num_days: int)
+        +__str__()
     }
 AbstractStock <|-- Stock
 
@@ -137,11 +155,10 @@ For last one, we need something that let the player interact with world and also
 ## Class diagram
 ```mermaid
 classDiagram
-    class events{
-        +jsondata
-    }
     class Events {
         -event_name: str
+        -stock_actives: str
+        -stock_name: str
         -description: str
         -impact: str
         -percentage: float
@@ -149,18 +166,18 @@ classDiagram
         -event_duration: float
         -timer: float
         -event_percentage_range: tuple
-        -affected_stock: str
-        +get_event_name() 
+        +get_event_name()
+        +description()
         +get_impact()
         +get_percentage()
         +get_state()
         +get_timer()
         +get_event_duration()
-        +get_event_percentage_range()
+        +get_affected_stock()
         +set_timer()
         +set_impact(impact: str)
         +set_percentage(percentage: float)
-        +change_percentage()
+        +tendence_selector()
         +change_impact()
         +state_activer()
         +state_desactiver()
@@ -168,23 +185,36 @@ classDiagram
 
     class EventsStore {
         -name: str
-        -activation_limit: int
         -sons_list: list
         -sons_active_list: list
+        +__repr__()
+        +__iter__()
+        +__hash__()
+        +__eq__(other: EventsStorer)
         +reach_limit() 
-        +select_son() 
-        +desactive_sons() 
+        +select_son()
+        +active_sons()
+        +desactive_sons()
+        +get_active_sons()
+        +name()
     }
 
     class AbstractStock {
         -stock_price: float
         -company_name: str
-        -affected_by: list
+        -std: float
+        -mean: float
+        -stock_variation: list
+        -stock_description: str
+        -actives: str
+        +get_company_name()
         +get_stock_price() 
-        +set_stock_price(stock_price: float) 
-        +get_affected_by() 
-        +add_affected_by(event_name: str) 
-        +delete_affected_by(event_name: str) 
+        +set_stock_price(stock_price: float)
+        +get_stock_variation()
+        +get_volatility()
+        +get_stock_description()
+        +get_company_active()
+        +stock_price_variation()
     }
 
     class Stock {
@@ -192,18 +222,29 @@ classDiagram
         -company_name: str
         -std: float
         -mean: float
-        -affected_by: list
         -stock_variation: list
-        +get_company_name() 
+        -stock_description: str
+        -actives: str
+        +percentage_change: float
+        +current_price: float
+        +previous_close: float
+        +time_manager: Time
+        +get_company_name: str
         +get_stock_price() 
-        +get_stock_variation() 
-        +get_affected_by() 
-        +set_stock_price(stock_price: float) 
-        +add_affected_by(event_name: str) 
-        +delete_affected_by(event_name: str) 
-        +stock_variation_changer() 
-        +event_affect_stock() 
-        +stock_price_variation() 
+        +set_stock_price(stock_price: float)
+        +get_stock_variation()
+        +get_volatility()
+        +get_stock_description()
+        +get_company_active()
+        +stock_price_variation()
+        +event_affect_stock(event: Events)
+        +stock_variation_storer(opened: float,close: float,high: float,low: float)
+        +candlestick()
+        +update_stock_price(percentage: float)
+        +get_previous_close()
+        +get_percentage()
+        +generate_initial_stock_data(num_days: int)
+        +__str__()
     }
 
     class Controller {
@@ -213,10 +254,23 @@ classDiagram
 
     class Player {
         -player_portfolio: dict
+        -player_portfolio["USD"]: float
+        -player_money_invested_in_stock_always: dict
+        -player_total_balance: dict
+        +player_money()
+        +get_player_money_invested_in_stock()
+        +get_player_balance()
+        +save_player_money_invested_in_stock(stock: Stock, quantity: int)
+        +validate_input_quantity(func)
         +buy_stock(stock: Stock, quantity: int) 
-        +sell_stock(stock: Stock, quantity: int) 
-        +get_stock_amount(stock: Stock) 
-        +get_portfolio() 
+        +sell_stock(stock: Stock, quantity: int)
+         +get_portfolio()
+        +get_stock_amount(stock: Stock)
+        +print_generator(iterable) 
+        +get_portfolio()
+        +print_player_money_invested_in_stock()
+        +print_player_balance()
+        +__str__()
     }
 
     class View {
@@ -229,15 +283,44 @@ classDiagram
         -events: dict
         -stocks: dict
         -player: Player
-        +load_stocks() 
-        +run() 
-        +read_news(news: str) 
+        +time_doors: Time
+        +time_edison: Time
+        +time_game_pause: Time
+        +time_araboilcompany: Time
+        +time_mvidia: Time
+        +time_pear: Time
+        +time_usweapons: Time
+        +news: News
+        +load_stocks()
+        +load_events()
+        +get_not_reach_limit_storer()
+        +active_events_sons()
+        +verify_all_active()
+        +posibility_active_event()
+        +create_event()
+        +calculate_percentage()
+        +pass_percentage_to_stocks()
+        +desactive_event()
+        +run()
+        +show_news()
+        +read_news(event_name: str) 
         +buy_stock(stock_name: str, amount: int) 
         +sell_stock(stock_name: str, amount: int) 
         +next_week() 
-        +see_portfolio() 
+        +see_portfolio()
+        +see_market()
+        +candle_stick() 
     }
-
+    class Time {
+        +current_date
+        +get_next_sate()
+        +get_date()
+    }
+    class News {
+        +event_storers: dict
+        +get_news_titles()
+        +get_news_article(event_name: str)
+    }
     EventsStore *-- Events
     AbstractStock <|-- Stock
     Controller *-- World
@@ -246,7 +329,10 @@ classDiagram
     World *-- Events
     World *-- Stock
     World *-- Player
-    events ..> World : Dependency
+    World *-- Time
+    World *-- News
+    Stock *-- Time
+    News *-- EventsStore
 
 ```
 
