@@ -55,6 +55,12 @@ class View:
         next_week
         advance the game to the next week.
         """,
+        "see_market":
+        """
+        see_market
+        Shows the market and the prices of the stocks.
+        """
+        ,
         "exit": 
         """
         exit
@@ -85,14 +91,16 @@ class View:
                     print(f"command {command_split} not recognized.")
                 #TODO
         elif command == "exit":
+            print("Thanks for playing")
             return -1
         else:
             try: 
-                print(self.controler.eval_comad(command))
+                print(self.controler.eval_command(command))
             except Exception as e:
                 print(str(e))
 
 
     def run(self):
+        print("Welcome to the stock market game.\n Type help for a list of commands.\n")
         while(self.read() != -1):
             pass

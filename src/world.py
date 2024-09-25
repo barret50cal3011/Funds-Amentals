@@ -178,7 +178,7 @@ class World:
     def run(self):
         timer = 0
         while timer < 10:
-            pdb.set_trace()
+            self.create_event()
             timer += 1 
         
     def show_news(self):
@@ -205,7 +205,7 @@ class World:
             else:
                 print(f"No articles available for the event: {event_name}")
         else:
-            print("No specific event provided to display the article.")
+            self.show_news()
 
 
 
@@ -226,7 +226,12 @@ class World:
     def see_portfolio(self):
         return self.__player.get_portfolio()
 
-
+    def see_market(self):
+        stock_prices = {}
+        for stock in self.__stocks:
+            stock_prices[stock] = self.__stocks[stock].get_stock_price()
+        return self.__stocks
+    
 if __name__ == '__main__':
     world = World()
     world.run()
