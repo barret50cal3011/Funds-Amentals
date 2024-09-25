@@ -192,7 +192,7 @@ class World:
     def run(self):
         
         timer = 0
-        while timer < 7:
+        while timer < 1000:
             self.next_week()
             # hi = input("y or n")
             # if hi == "y":
@@ -244,7 +244,7 @@ class World:
         for stock in self.__stocks:
             for i in range(7):
                 self.__stocks[stock].stock_price_variation()
-        self.global_time.get_next_date()
+        self.time_doors.get_next_date()
         self.desactive_event()
         self.create_event()
 
