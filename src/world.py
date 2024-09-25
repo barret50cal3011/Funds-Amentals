@@ -52,13 +52,13 @@ class World:
         :return: The `load_stocks` method returns a dictionary containing information about various stocks. Each stock is represented by a key-value pair in the dictionary, where the key is the stock name and the value is an instance of the `Stock` class with specific attributes such as price, symbol, growth rate, dividend yield, description, sector, and time data.
         """
         stocks = {
-            "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.time_doors),
-            "Edison": Stock(650, "Edison", 0.6, 0.7, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.time_edison),
-            "Game pause": Stock(200, "Game pause", 0.7, 0.6, "Retail and gaming company, sells video games and gaming consoles.", "Retail", self.time_game_pause),
-            "ArabOilCompany": Stock(850, "ArabOilCompany", 0.4, 0.5, "Oil company, sells crude oil and petroleum products.", "Oil", self.time_araboilcompany),
-            "MVidia": Stock(500, "MVidia", 0.5, 0.5, "Semiconductor and GPU technology company, sells graphic processing units and AI chips.", "Technology", self.time_mvidia),
-            "Pear": Stock(700, "Pear", 0.4, 0.5, "Consumer electronics company, sells smartphones, tablets, and computers.", "Technology", self.time_pear),
-            "USWeapons": Stock(900, "USWeapons", 0.3, 0.6, "Defense and aerospace company, sells weapons systems and military aircraft.", "Defense", self.time_usweapons)
+            "Doors": Stock(300, "Doors", 0.012414205459112449, 0.0006098784133542958, "Technology and software company, sells operating systems and software.", "Software", self.time_doors),
+            "Edison": Stock(650, "Edison", 0.03630265320325847, -0.0007347852804773617, "Energy and electrical innovations company, sells electric vehicles and renewable energy solutions.", "Electricity", self.time_edison),
+            "Game pause": Stock(200, "Game pause", 0.10148539708158638, 0.0016737959364185571, "Retail and gaming company, sells video games and gaming consoles.", "Retail", self.time_game_pause),
+            "ArabOilCompany": Stock(850, "ArabOilCompany", 0.007722231545849076, -0.0009138532535204416, "Oil company, sells crude oil and petroleum products.", "Oil", self.time_araboilcompany),
+            "MVidia": Stock(500, "MVidia", 0.036079668152936534, 0.004679599881460431, "Semiconductor and GPU technology company, sells graphic processing units and AI chips.", "Technology", self.time_mvidia),
+            "Pear": Stock(700, "Pear", 0.015056806917710457, 0.0010500707553774485, "Consumer electronics company, sells smartphones, tablets, and computers.", "Technology", self.time_pear),
+            "USWeapons": Stock(900, "USWeapons", 0.009309299619771732, 0.001484152190779365, "Defense and aerospace company, sells weapons systems and military aircraft.", "Defense", self.time_usweapons)
         }
         return stocks
 
