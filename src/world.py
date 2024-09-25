@@ -31,6 +31,11 @@ class World:
             
         self.news = News(self.__events) 
 
+        for stock in self.__stocks:
+            for i in range(15):
+                self.__stocks[stock].stock_price_variation()
+
+
     def load_stocks(self) -> dict:
         stocks = {
             "Doors": Stock(300, "Doors", 0.5, 0.4, "Technology and software company, sells operating systems and software.", "Software", self.global_time),
@@ -225,6 +230,9 @@ class World:
 
 
     def next_week(self):
+        for stock in self.__stocks:
+            for i in range(7):
+                self.__stocks[stock].stock_price_variation()
         self.global_time.get_next_date()
         self.desactive_event()
         self.create_event()
