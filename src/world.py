@@ -1,11 +1,13 @@
 import random
 from typing import Optional
-from events_m.events import Events
-from stocks_m.stock import Stock
-from Player import Player
-from events_m.events_storer import EventsStorer
-from newtimer import Time
-from news import News
+from src.events_m.events import Events
+from src.stocks_m.stock import Stock
+from src.Player import Player
+from src.events_m.events_storer import EventsStorer
+from src.newtimer import Time
+from src.news import News
+
+import pdb
 
 class World:
 
@@ -125,7 +127,7 @@ class World:
             father_events: list = list(filtred_events_not_reach_limit.keys())
             weight: list = list(filtred_events_not_reach_limit.values())
 
-            selected_father_event: EventsStorer = random.choices(population = father_events, weights = weight, k=1)
+            selected_father_event: EventsStorer = random.choices(population = father_events, weights = weight, k=1)[0]
                 
             selected_father_event.active_sons()
 
@@ -155,14 +157,11 @@ class World:
     def pass_percentage_to_stocks(self) -> None:
         percentage: dict = self.calculate_percentage()
         stocks_dict: dict = self.__stocks
-
         for stock in stocks_dict:
             if stock in percentage:
                 percentage_of_stock: float = percentage[stock]
                 stock_will_be_affeccted: Stock = stocks_dict.get(stock)
                 stock_will_be_affeccted.update_stock_price(percentage=percentage_of_stock)
-            else:
-                raise ValueError("Something happen when passing percentage to stocks")
 
 
     def desactive_event(self) -> None:
@@ -173,12 +172,20 @@ class World:
             self.pass_percentage_to_stocks()
 
 
+
+
     def run(self):
         timer = 0
-        while timer < 10:
-            self.create_event()
+        while timer < 7:
+            self.next_week()
+            # hi = input("y or n")
+            # if hi == "y":
+            #     pass
             timer += 1 
-        
+
+
+
+
     def show_news(self):
         print("Generating news headlines...")
         headlines = self.news.get_news_titles()
@@ -218,8 +225,9 @@ class World:
 
 
     def next_week(self):
+        self.global_time.get_next_date()
+        self.desactive_event()
         self.create_event()
-
 
     def see_portfolio(self):
         return self.__player.get_portfolio()
@@ -227,9 +235,8 @@ class World:
     def see_market(self):
         stock_prices = {}
         for stock in self.__stocks:
-            price = self.__stocks[stock].get_stock_price()
-            stock_prices[stock] = price
-        return stock_prices
+            stock_prices[stock] = self.__stocks[stock].get_stock_price()
+        return self.__stocks
     
 
     def candle_stick(self, stock_name):
@@ -238,8 +245,5 @@ class World:
 
  
 if __name__ == '__main__':
-    stocks_list = [Stock(100.0, "Edison"), Stock(150.0, "ArabOilCompany"),Stock(100.0, "USWeapons"),Stock(100.0, "GamePause"),Stock(100.0, "Doors"),Stock(100.0, "Mvidia"),Stock(100.0, "Pear"),]
-    player = Player(i_starting_USD=1000.0)
-    events=None
-    world = World(events, stocks_list, player)
+    world = World()
     world.run()
