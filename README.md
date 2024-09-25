@@ -422,6 +422,10 @@ To create a virtual enviroment we used virtualenv and used the following [tutori
 
 Once the virtual enviroment is running, you will need to run the index.py file using a python 3 version.
 
+## Running the program 
+
+To run the game after entering the virtual enviroment you need to execute the index.py file using python. The comand goes as follows: ```python index.py```
+
 ## Basic Commands
 
 ```
