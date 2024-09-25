@@ -244,7 +244,7 @@ class World:
         stock_prices = {}
         for stock in self.__stocks:
             stock_prices[stock] = self.__stocks[stock].get_stock_price()
-        return self.__stocks
+        return stock_prices
     
 
     def candle_stick(self, stock_name):
